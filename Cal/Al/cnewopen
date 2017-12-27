@@ -1,0 +1,40 @@
+#!/bin/bash
+
+ChapterName=$1
+UnitName=$2
+FileName=$3
+OpenMode=$4
+
+if [[ ! -d ./src/${ChapterName} ]]; then
+    mkdir ./src/${ChapterName}
+    mkdir ./include/${ChapterName}
+    mkdir ./test/${ChapterName}
+else
+    echo "${ChapterName} already exits!"
+fi
+
+if [[ ! -d ./src/${ChapterName}/${UnitName} ]]; then
+    mkdir ./src/${ChapterName}/${UnitName}
+    mkdir ./include/${ChapterName}/${UnitName}
+    mkdir ./test/${ChapterName}/${UnitName}
+else
+    echo "${UnitName} already exits!"
+fi
+
+if [[ ! -f ./src/${ChapterName}/${UnitName}/${FileName}.cpp ]]; then
+    touch ./src/${ChapterName}/${UnitName}/${FileName}.cpp
+    touch ./include/${ChapterName}/${UnitName}/${FileName}.h
+    touch ./test/${ChapterName}/${UnitName}/${FileName}_test.cpp
+    echo "#include \"${ChapterName}/${UnitName}/${FileName}.h\"" > ./src/${ChapterName}/${UnitName}/${FileName}.cpp
+    echo "class ${FileName} {" > ./include/${ChapterName}/${UnitName}/${FileName}.h
+    echo "};" >> ./include/${ChapterName}/${UnitName}/${FileName}.h
+    echo "#include \"${ChapterName}/${UnitName}/${FileName}.h\"" >> ./test/tester.cpp
+else
+    echo "${FileName} already exits!"
+fi
+
+if [[ ${OpenMode} == "v" ]]; then
+    vim ./src/${ChapterName}/${UnitName}/${FileName}.cpp -c "vsplit ../../../include/${ChapterName}/${UnitName}/${FileName}.h" -c "split ../../../test/tester.cpp" -c "vsplit ../test/${ChapterName}/${UnitName}/${FileName}_test.cpp"
+else
+    gvim ./src/${ChapterName}/${UnitName}/${FileName}.cpp -c "vsplit ../../../include/${ChapterName}/${UnitName}/${FileName}.h" -c "split ../../../test/tester.cpp" -c "vsplit ../test/${ChapterName}/${UnitName}/${FileName}_test.cpp"
+fi

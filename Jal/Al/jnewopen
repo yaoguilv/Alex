@@ -1,0 +1,34 @@
+#!/bin/bash
+
+ChapterName=$1
+UnitName=$2
+FileName=$3
+OpenMode=$4
+
+if [[ ! -d ./src/${ChapterName} ]]; then
+    mkdir ./src/${ChapterName}
+else
+    echo "${ChapterName} already exits!"
+fi
+
+if [[ ! -d ./src/${ChapterName}/${UnitName} ]]; then
+    mkdir ./src/${ChapterName}/${UnitName}
+else
+    echo "${UnitName} already exits!"
+fi
+
+if [[ ! -f ./src/${ChapterName}/${UnitName}/${FileName}.java ]]; then
+    touch ./src/${ChapterName}/${UnitName}/${FileName}.java
+    echo "package ${ChapterName}.${UnitName};" > ./src/${ChapterName}/${UnitName}/${FileName}.java
+    echo "import ${ChapterName}.${UnitName}.${FileName};" >> ./test/Tester.java
+else
+    echo "${FileName} already exits!"
+fi
+
+if [[ ${OpenMode} == "v" ]]; then
+    vim ./src/${ChapterName}/${UnitName}/${FileName}.java -c "vsplit ../../../test/Tester.java"
+else
+    gvim ./src/${ChapterName}/${UnitName}/${FileName}.java -c "vsplit ../../../test/Tester.java"
+fi
+
+

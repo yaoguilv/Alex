@@ -1,0 +1,13 @@
+#!/bin/bash
+package=test
+
+# distinguish between windows and liunx; you can also distinguish by $OSTYPE : liunx-gnu or cygwin
+if [[ $JAVA_HOME == *":"* ]]
+then
+    classpath="bin;lib/StdLib.jar"
+else
+    classpath="bin:lib/StdLib.jar"
+fi
+
+# java -cp $classpath $package.MergeSort_TEST
+java -cp $classpath $package/Tester

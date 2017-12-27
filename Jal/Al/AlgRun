@@ -1,0 +1,18 @@
+#!/bin/sh
+
+package=Chapter2_Sorting.Unit2_Mergesort
+
+# distinguish between windows and liunx; you can also distinguish by $OSTYPE : liunx-gnu or cygwin
+if [[ $JAVA_HOME == *":"* ]]
+then
+    classpath="bin;lib/StdLib.jar"
+else
+    classpath="bin:lib/StdLib.jar"
+fi
+
+# java -cp $classpath $package.MergeSort_TEST
+# java -cp $classpath $package.Insertion_TEST
+java -cp $classpath Chapter3_Searching.Unit3_BalancedSearchTrees.RedBlackBST
+
+# java -cp $classpath Tester
+

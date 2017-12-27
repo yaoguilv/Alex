@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# distinguish between windows and liunx; you can also distinguish by $OSTYPE : liunx-gnu or cygwin
+if [[ $JAVA_HOME == *":"* ]]
+then
+    classpath="bin;lib/StdLib.jar"
+else
+    classpath="bin:lib/StdLib.jar"
+fi
+
+java -cp $classpath test.Tester
+# jdb -classpath $classpath -sourcepath src:test test.Tester
