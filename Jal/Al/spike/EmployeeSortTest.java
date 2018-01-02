@@ -1,8 +1,6 @@
-package spike;
-
 import java.util.*;
 
-public class Ticket {
+public class EmployeeSortTest {
     /**
     * @param args
     */
@@ -66,4 +64,3 @@ class Employee  implements Comparable<Employee>
     private String name;
     private double salary;
 }
-

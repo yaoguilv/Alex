@@ -20,6 +20,8 @@ fi
 if [[ ! -f ./src/${ChapterName}/${UnitName}/${FileName}.java ]]; then
     touch ./src/${ChapterName}/${UnitName}/${FileName}.java
     echo "package ${ChapterName}.${UnitName};" > ./src/${ChapterName}/${UnitName}/${FileName}.java
+    echo "public class ${FileName} {" >> ./src/${ChapterName}/${UnitName}/${FileName}.java
+    echo "}" >> ./src/${ChapterName}/${UnitName}/${FileName}.java
     echo "import ${ChapterName}.${UnitName}.${FileName};" >> ./test/Tester.java
 else
     echo "${FileName} already exits!"

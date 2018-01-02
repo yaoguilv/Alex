@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include <iterator>
-#include "Chapter2_Sorting/Unit2_Mergesort/ClientConnection.h"
+#include "C2/U2/ClientConnection.h"
 #include "StdLib.h"
 
 using namespace std;
