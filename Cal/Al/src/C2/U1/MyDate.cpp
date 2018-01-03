@@ -22,14 +22,15 @@ int MyDate::getYear()
     return year;
 }
 
-int MyDate::compareTo(MyDate * that)
+int MyDate::compareTo(Comparable * that)
 {
-    if(this->year > that->year) return +1;
-    if(this->year < that->year) return -1;
-    if(this->month > that->month) return +1;
-    if(this->month < that->month) return -1;
-    if(this->day > that->day) return +1;
-    if(this->day < that->day) return -1;
+    MyDate * thatDate = dynamic_cast<MyDate *>(that);
+    if(this->year > thatDate->year) return +1;
+    if(this->year < thatDate->year) return -1;
+    if(this->month > thatDate->month) return +1;
+    if(this->month < thatDate->month) return -1;
+    if(this->day > thatDate->day) return +1;
+    if(this->day < thatDate->day) return -1;
     return 0;
 }
 

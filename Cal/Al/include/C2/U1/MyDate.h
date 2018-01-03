@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class MyDate : Comparable {
+class MyDate : public Comparable {
     private:
         int day;
         int month;
@@ -13,6 +13,6 @@ class MyDate : Comparable {
         int getDay();
         int getMonth();
         int getYear();
-        int compareTo(MyDate * that);
+        int compareTo(Comparable * that);
         string toString();
 };

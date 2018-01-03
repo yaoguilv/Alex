@@ -1,4 +1,8 @@
+#ifndef COMPARABLE_H
+#define COMPARABLE_H
 class Comparable
 {
-    virtual int compareTo(Comparable that) {};
+public:
+    virtual int compareTo(Comparable * that) = 0;
 };
+#endif
