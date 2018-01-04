@@ -11,9 +11,13 @@ int main()
     *(dat) = new MyDate(1, 1, 2010);
     *(dat + 1) = new MyDate(1, 1, 2017);
     *(dat + 2) = new MyDate(1, 1, 2013);
-    Selection::sort((Comparable **)dat, 3);
-    for(int i = 0; i < 3; i++)
-    {
-        cout << dat[i]->toString() << endl;
-    }
+    /* Selection::sort((Comparable **)dat, 3); */
+    /* for(int i = 0; i < 3; i++) */
+    /* { */
+    /*     cout << dat[i]->toString() << endl; */
+    /* } */
+    Comparable * pC1 = *(dat);
+    Comparable * pC2 = *(dat + 1);
+    int a = pC1->compareTo(pC2);
+    cout << a << endl;
 }
