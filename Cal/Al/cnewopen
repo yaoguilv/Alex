@@ -5,6 +5,9 @@ UnitName=$2
 FileName=$3
 OpenMode=$4
 
+typeset -u UpperFileName
+UpperFileName=${FileName}
+
 if [[ ! -d ./src/${ChapterName} ]]; then
     mkdir ./src/${ChapterName}
     mkdir ./include/${ChapterName}
@@ -26,8 +29,11 @@ if [[ ! -f ./src/${ChapterName}/${UnitName}/${FileName}.cpp ]]; then
     touch ./include/${ChapterName}/${UnitName}/${FileName}.h
     touch ./test/${ChapterName}/${UnitName}/${FileName}_test.cpp
     echo "#include \"${ChapterName}/${UnitName}/${FileName}.h\"" > ./src/${ChapterName}/${UnitName}/${FileName}.cpp
-    echo "class ${FileName} {" > ./include/${ChapterName}/${UnitName}/${FileName}.h
+    echo "#ifndef ${UpperFileName}_H" > ./include/${ChapterName}/${UnitName}/${FileName}.h
+    echo "#define ${UpperFileName}_H" >> ./include/${ChapterName}/${UnitName}/${FileName}.h
+    echo "class ${FileName} {" >> ./include/${ChapterName}/${UnitName}/${FileName}.h
     echo "};" >> ./include/${ChapterName}/${UnitName}/${FileName}.h
+    echo "#endif" >> ./include/${ChapterName}/${UnitName}/${FileName}.h
     echo "#include \"${ChapterName}/${UnitName}/${FileName}.h\"" >> ./test/tester.cpp
 else
     echo "${FileName} already exits!"
