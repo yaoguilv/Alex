@@ -1,9 +1,9 @@
 #include "C2/U1/Insertion.h"
-public static <T extends Comparable<T>> void sort(T[] a)
+
+void Insertion::sort(Comparable ** a, int arrLen)
 {
     // Sort a[] into increasing order.
-    int N = a.length;
-    for(int i = 1; i < N; i++)
+    for(int i = 1; i < arrLen; i++)
     {
         // Insert a[i] among a[i-1], a[i-2], a[i-3]
         for(int j = i; j > 0 && less(a[j], a[j - 1]); j--)
@@ -11,21 +11,21 @@ public static <T extends Comparable<T>> void sort(T[] a)
     }
 }
 
-private static <T extends Comparable<T>> void exch(T[] a, int i, int j)
+void Insertion::exch(Comparable ** a, int i, int j)
 {
-    T t = a[i];
+    Comparable * t = a[i];
     a[i] = a[j];
     a[j] = t;
 }
 
-private static <T extends Comparable<T>> boolean less(T v, T w)
+bool Insertion::less(Comparable * v, Comparable * w)
 {
-    return v.compareTo(w) < 0;
+    return v->compareTo(w) < 0;
 }
 
-public static <T extends Comparable<T>> boolean isSorteed(T[] a)
+bool Insertion::isSorteed(Comparable ** a, int arrLen)
 {
-    for(int i = 1; i < a.length; i++)
+    for(int i = 1; i < arrLen; i++)
         if(less(a[i], a[i - 1])) return false;
     return true;
 }
