@@ -1,12 +1,14 @@
 #include "C2/U1/SortCompare.h"
+#include "C2/U1/Insertion.h"
+#include "C2/U1/Selection.h"
 #include <chrono>
 #include <random>
 
-double SortCompare::time(string alg, double * a, int arrLen)
+double SortCompare::time(string alg, double ** a, int arrLen)
 {
     chrono::time_point<chrono::system_clock> start = chrono::system_clock::now();
-    if(alg.equals("Insertion")) Insertion::sort(a, arrLen);
-    if(alg.equals("Selection")) Selection::sort(a, arrLen);
+    if(alg == "Insertion") Insertion::sort(a, arrLen);
+    if(alg =="Selection") Selection::sort(a, arrLen);
     chrono::system_clock::time_point end = chrono::system_clock::now();
     chrono::duration<double> elapsed_seconds = end - start;
 
