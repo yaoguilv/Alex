@@ -8,5 +8,5 @@ else
     classpath="bin:lib/StdLib.jar"
 fi
 
-java -cp $classpath test.Tester Insertion Selection 1000 100
+java -cp $classpath test.Tester
 # jdb -classpath $classpath -sourcepath src:test test.Tester

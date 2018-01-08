@@ -1,14 +1,22 @@
 package C2.U1;
-public class Insertion {
+
+public class BubbleSort {
     public static <T extends Comparable<T>> void sort(T[] a)
     {
-        // Sort a[] into increasing order.
         int N = a.length;
-        for(int i = 1; i < N; i++)
+        for(int i = 0; i < N - 1; i++)
         {
-            // Insert a[i] among a[i-1], a[i-2], a[i-3]
-            for(int j = i; j > 0 && less(a[j], a[j - 1]); j--)
-                exch(a, j, j - 1);
+            boolean flag = true;
+            for(int j = 0; j < N - 1 - i; j++)
+            {
+                if(less(a[j + 1], a[j]))
+                {
+                    exch(a, j, j + 1);
+                    flag = false;
+                }
+                if(flag)
+                    break;
+            }
         }
     }
 
@@ -35,10 +43,11 @@ public class Insertion {
     {
         Date[] dat = new Date[]{new Date(1, 1, 2010),
         new Date(1, 1, 2017), new Date(1, 1, 2015)};
-        Shell.sort(dat);
+        Selection.sort(dat);
         for(int i = 0; i < 3; i++)
         {
             System.out.println(dat[i]);
         }
     }
+
 }

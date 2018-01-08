@@ -1,30 +1,23 @@
+#include "util/CDouble.h"
 #include <iostream>
 #include <string>
 #include <sstream>
+
+#include "C2/U1/Shell.h"
 #include "C2/U1/MyDate.h"
-#include "C2/U1/SortCompare.h
 
 using namespace std;
 
 int main(int argc, char ** argv)
 {
-    cout << "Hello tester!" << endl;
-    string alg1 = argv[1];
-    string alg2 = argv[2];
+    MyDate ** dat = new MyDate*[3];
+    dat[0] = new MyDate(1, 1, 2010);
+    dat[1] = new MyDate(1, 1, 2017);
+    dat[2] = new MyDate(1, 1, 2015);
 
-    int N;
-    stringstream((string)argv[3]) >> N;
-    int T;
-    stringstream((string)argv[4]) >> T;
-    // total for alg1
-    double t1 = SortCompare::timeRandomInput(alg1, N, T);
-    // total for alg2
-    double t2 = SortCompare::timeRandomInput(alg2, N, T);
-    double ti = t2/t1;
-    cout << "For " << N << " random doubles " << endl;
-    cout << alg1 << " is " << ti <<  << "times faster than " << alg2 << endl;
-    StdLib.StdOut.printf("For %d random Doubles\n      %s is", N, alg1);
-    StdLib.StdOut.printf(" %.1f times faster than %s\n", t2/t1, alg2);
-
+    Shell::sort((Comparable **)dat, 3);
+    for(int i = 0; i < 3; i++)
+    {
+        cout << dat[i]->toString() << endl;
+    }
 }
-
