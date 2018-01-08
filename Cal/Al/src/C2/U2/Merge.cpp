@@ -2,7 +2,7 @@
 
 void Merge::sort(Comparable ** a, int arrLen)
 {
-    aux = new Comparable*[arrLen];
+    Merge::aux = new Comparable*[arrLen];
     sort(a, 0, arrLen-1);
 }
 
