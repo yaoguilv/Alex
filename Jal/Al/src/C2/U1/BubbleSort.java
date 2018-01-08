@@ -6,16 +6,12 @@ public class BubbleSort {
         int N = a.length;
         for(int i = 0; i < N - 1; i++)
         {
-            boolean flag = true;
             for(int j = 0; j < N - 1 - i; j++)
             {
                 if(less(a[j + 1], a[j]))
                 {
                     exch(a, j, j + 1);
-                    flag = false;
                 }
-                if(flag)
-                    break;
             }
         }
     }
@@ -50,4 +46,16 @@ public class BubbleSort {
         }
     }
 
+    public static void main(String[] args)
+    {
+        Double[] a = new Double[10];
+        for(int i = 0; i < 10; i++)
+            a[i] = StdLib.StdRandom.uniform();
+        for(int i = 0; i < 10; i++)
+            System.out.println(a[i]);
+        System.out.println("------");
+        BubbleSort.sort(a);
+        for(int i = 0; i < 10; i++)
+            System.out.println(a[i]);
+    }
 }
