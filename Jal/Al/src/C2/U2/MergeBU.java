@@ -3,27 +3,20 @@ package C2.U2;
 import C2.U1.Date;
 import java.util.*;
 
-public class Merge {
+public class MergeBU {
     // auxiliary array for merges
     private static Comparable<?>[] aux;
 
     public static <T extends Comparable<T>> void sort(T[] a)
     {
-        aux = new Comparable<?>[a.length];
-        sort(a, 0, a.length - 1);
-    }
-
-    private static <T extends Comparable<T>> void sort(T[] a, int lo, int hi)
-    {
-        // Sort a[lo..hi].
-        if(hi <= lo) return;
-        int mid = lo + (hi - lo)/2;
-        // Sort left half.
-        sort(a, lo, mid);
-        // Sort right half.
-        sort(a, mid + 1, hi);
-        // Merge results
-        merge(a, lo, mid, hi);
+        // Do lg N passes of pairwise merges.
+        int N = a.length;
+        aux = new Comparable<?>[N];
+        // sz: subaray size
+        for(int sz = 1; sz < N; sz = sz + sz)
+            // lo: subarray index
+            for(int lo = 0; lo < N - sz; lo += sz + sz)
+                merge(a, lo, lo + sz -1, Math.min(lo + sz + sz -1, N - 1));
     }
 
     @SuppressWarnings("unchecked")
@@ -71,7 +64,7 @@ public class Merge {
     {
         Date[] dat = new Date[]{new Date(1, 1, 2010),
         new Date(1, 1, 2017), new Date(1, 1, 2015)};
-        Merge.sort(dat);
+        MergeBU.sort(dat);
         for(int i = 0; i < 3; i++)
         {
             System.out.println(dat[i]);
