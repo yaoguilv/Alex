@@ -1,5 +1,11 @@
 #include "C2/U2/Merge.h"
 
+// static member variable must be defined;
+// in .h file , they are only been declared, not been defined
+// or there will be error: undefined reference to Merge::aux
+// can only been written in .cpp file, or tester.o linking will error: multi-definition
+Comparable ** Merge::aux;
+
 void Merge::sort(Comparable ** a, int arrLen)
 {
     Merge::aux = new Comparable*[arrLen];

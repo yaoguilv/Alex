@@ -1,15 +1,15 @@
 package C2.U2;
-public class Merge {
+public class Merge<T extends Comparable<T>> {
     // auxiliary array for merges
-    private static Comparable[] aux;
+    private T[] aux;
 
-    private static <T extends Comparable<T>> void sort(T[] a)
+    private void sort(T[] a)
     {
-        aux = new Comparable[a.length];
+        T[] aux1 = new T[a.length];
         sort(a, 0, a.length - 1);
     }
 
-    private static <T extends Comparable<T>> void sort(T[] a, int lo, int hi)
+    private void sort(T[] a, int lo, int hi)
     {
         // Sort a[lo..hi].
         if(hi <= lo) return;
@@ -22,7 +22,7 @@ public class Merge {
         merge(a, lo, mid, hi);
     }
 
-    private static <T extends Comparable<T>> void merge(T[] a, int lo, int mid, int hi)
+    private void merge(T[] a, int lo, int mid, int hi)
     {
         // Merge a[lo..mid] with a[mid+1..hi].
         int i = lo, j = mid + 1;
@@ -41,5 +41,24 @@ public class Merge {
             else
                 a[k] = aux[i++];
         }
+    }
+
+    private void exch(T[] a, int i, int j)
+    {
+        T t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+    }
+
+    private boolean less(T v, T w)
+    {
+        return v.compareTo(w) < 0;
+    }
+
+    public boolean isSorteed(T[] a)
+    {
+        for(int i = 1; i < a.length; i++)
+            if(less(a[i], a[i - 1])) return false;
+        return true;
     }
 }
