@@ -9,8 +9,7 @@ public class Tester {
     {
         Date[] dat = new Date[]{new Date(1, 1, 2010),
         new Date(1, 1, 2017), new Date(1, 1, 2015)};
-        Merge<Date> myMerge;
-        myMerge.sort(dat);
+        Merge.sort(dat);
         for(int i = 0; i < 3; i++)
         {
             System.out.println(dat[i]);

@@ -37,17 +37,6 @@ public class BubbleSort {
 
     public static void main(String[] args)
     {
-        Date[] dat = new Date[]{new Date(1, 1, 2010),
-        new Date(1, 1, 2017), new Date(1, 1, 2015)};
-        Selection.sort(dat);
-        for(int i = 0; i < 3; i++)
-        {
-            System.out.println(dat[i]);
-        }
-    }
-
-    public static void main(String[] args)
-    {
         Double[] a = new Double[10];
         for(int i = 0; i < 10; i++)
             a[i] = StdLib.StdRandom.uniform();

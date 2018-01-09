@@ -1,15 +1,15 @@
 package C2.U2;
-public class Merge<T extends Comparable<T>> {
+public class Merge {
     // auxiliary array for merges
-    private T[] aux;
+    private static Comparable<?>[] aux;
 
-    private void sort(T[] a)
+    public static <T extends Comparable<T>> void sort(T[] a)
     {
-        T[] aux1 = new T[a.length];
+        aux = new Comparable<?>[a.length];
         sort(a, 0, a.length - 1);
     }
 
-    private void sort(T[] a, int lo, int hi)
+    private static <T extends Comparable<T>> void sort(T[] a, int lo, int hi)
     {
         // Sort a[lo..hi].
         if(hi <= lo) return;
@@ -22,7 +22,8 @@ public class Merge<T extends Comparable<T>> {
         merge(a, lo, mid, hi);
     }
 
-    private void merge(T[] a, int lo, int mid, int hi)
+    @SuppressWarnings("unchecked")
+    private static <T extends Comparable<T>> void merge(T[] a, int lo, int mid, int hi)
     {
         // Merge a[lo..mid] with a[mid+1..hi].
         int i = lo, j = mid + 1;
@@ -33,29 +34,29 @@ public class Merge<T extends Comparable<T>> {
         for(int k = lo; k <= hi; k++)
         {
             if (i > mid)
-                a[k] = aux[j++];
+                a[k] = (T)aux[j++];
             else if(j > hi)
-                a[k] = aux[i++];
-            else if(less(aux[j], aux[i]))
-                a[k] = aux[j++];
+                a[k] = (T)aux[i++];
+            else if(less((T)aux[j], (T)aux[i]))
+                a[k] = (T)aux[j++];
             else
-                a[k] = aux[i++];
+                a[k] = (T)aux[i++];
         }
     }
 
-    private void exch(T[] a, int i, int j)
+    private static <T extends Comparable<T>> void exch(T[] a, int i, int j)
     {
         T t = a[i];
         a[i] = a[j];
         a[j] = t;
     }
 
-    private boolean less(T v, T w)
+    private static <T extends Comparable<T>> boolean less(T v, T w)
     {
         return v.compareTo(w) < 0;
     }
 
-    public boolean isSorteed(T[] a)
+    public static <T extends Comparable<T>> boolean isSorteed(T[] a)
     {
         for(int i = 1; i < a.length; i++)
             if(less(a[i], a[i - 1])) return false;
