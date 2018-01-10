@@ -2,68 +2,59 @@ package spike;
 
 import java.util.*;
 
-public class Ticket {
-    /**
-    * @param args
-    */
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        Employee[] staff =  new Employee[ 3 ];
-        staff[ 0 ] =  new Employee( "harry Hacker", 35000 );
-        staff[ 1 ] =  new Employee( "carl cracke", 75000 );
-        staff[ 2 ] =  new Employee( "tony Tester", 38000 );
-        Arrays.sort(staff); //sort方法可以实现对对象数组排序，但是必须实现 Comparable接口
-        /*Comparable接口原型为：
-        * public interface Comparable<T>
-        * {
-        *      int compareTo（T other);//接口的中方法自动属于public方法
-        * }
-        */
-        for (Employee e: staff)
-            System.out.println( "id=" +e.getId()+ "  name=" +e.getName()+
-                                ".salary=" +e.getSalary());
-    }
-}
-/*
-* 因为要实现对Employee对象的排序，所以在Employee类中要实现Comparable接口，
-* 也就是要实现comepareTo()方法
-*/
-class Employee  implements Comparable<Employee>
+class A<T>
 {
-    public Employee(String n, double s)
+    public T m;
+    public A(T a)
     {
-        name = n;
-        salary = s;
-        Random ID =  new Random();
-        id = ID.nextInt( 10000000 );
+        m = a;
     }
-    public int getId()
+
+    public T getM()
     {
-        return id;
+        return m;
     }
-    public String getName()
-    {
-        return name;
-    }
-    public double getSalary()
-    {
-        return salary;
-    }
-    public void raiseSalary( double byPercent)
-    {
-        double raise  = salary *byPercent/ 100 ;
-        salary+=raise;
-    }
-    public int compareTo(Employee other)
-    {
-        if (id<other.id) //这里比较的是什么 sort方法实现的就是按照此比较的东西从小到大排列
-            return - 1 ;
-        if (id>other.id)
-            return 1 ;
-        return 0 ;
-    }
-    private int id;
-    private String name;
-    private double salary;
 }
 
+class MyDate implements Comparable<MyDate>
+{
+    public int N;
+    public MyDate(int n)
+    {
+        N = n;
+    }
+
+    public int compareTo(MyDate that)
+    {
+        return 1;
+    }
+
+    public int getN()
+    {
+        return N;
+    }
+}
+
+public class Ticket {
+    public static void main(String[] args)
+    {
+        A<?>[] myA = new A<?>[3];
+        myA[0] = new A<Integer>(11);
+        myA[1] = new A<Integer>(12);
+        myA[2] = new A<Integer>(13);
+        @SuppressWarnings("unchecked")
+        A<Integer> d = (A<Integer>)myA[0];
+        // above codes: A<Interger> can been see as a child of A<?> (like C++ generation)
+        // java annotation "unchecked" is just like dynamic_cast in C++
+        System.out.println(d.m);
+
+        /* --------------------------------------------------------------------*/
+        /* more examples: */
+        Comparable<?>[] myD = new Comparable<?>[3];
+        myD[0] = new MyDate(2012);
+        @SuppressWarnings("unchecked")
+        MyDate myDD = (MyDate)myD[0];
+        // above codes: MyDate is a child of Comparable<MyDate>, Comparable<MyDate> is a child of Comparable<?>
+        System.out.println(myDD.N);
+    }
+}

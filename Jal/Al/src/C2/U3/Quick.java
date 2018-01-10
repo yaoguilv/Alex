@@ -1,4 +1,7 @@
 package C2.U3;
+import C2.U1.Date;
+import java.util.*;
+
 public class Quick {
     public static <T extends Comparable<T>> void sort(T[] a)
     {
@@ -58,6 +61,17 @@ public class Quick {
         for(int i = 1; i < a.length; i++)
             if(less(a[i], a[i - 1])) return false;
         return true;
+    }
+
+    public static void main(String[] args)
+    {
+        Date[] dat = new Date[]{new Date(1, 1, 2010),
+        new Date(1, 1, 2017), new Date(1, 1, 2015)};
+        Quick.sort(dat);
+        for(int i = 0; i < 3; i++)
+        {
+            System.out.println(dat[i]);
+        }
     }
 
 }
