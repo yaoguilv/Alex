@@ -1,4 +1,8 @@
 package C2.U3;
+
+import C2.U1.Date;
+import java.util.*;
+
 public class Quick3way {
     public static <T extends Comparable<T>> void sort(T[] a)
     {
@@ -42,4 +46,16 @@ public class Quick3way {
             if(less(a[i], a[i - 1])) return false;
         return true;
     }
+
+    public static void main(String[] args)
+    {
+        Date[] dat = new Date[]{new Date(1, 1, 2010),
+        new Date(1, 1, 2017), new Date(1, 1, 2015)};
+        Quick3way.sort(dat);
+        for(int i = 0; i < 3; i++)
+        {
+            System.out.println(dat[i]);
+        }
+    }
+
 }
