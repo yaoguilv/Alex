@@ -1,9 +1,15 @@
 package C2.U4;
 
+import C2.U1.Date;
+import java.util.*;
+
 public class Heapsort {
-    public static void sort(Comparable[] a)
+    // just can sort the [1..N] numbers, no 0 number
+    public static <T extends Comparable<T>> void sort(T[] a)
     {
-        int N = a.length;
+        // sink method only operate the [1..N] elements
+        // because 1*2 = 2,2*2=4... (it is binary tree) ,while 0*2 = 0
+        int N = a.length - 1;
         for(int k = N/2; k >= 1; k--)
             sink(a, k, N);
         while(N > 1)
@@ -13,36 +19,38 @@ public class Heapsort {
         }
     }
 
-    private void sink(int k)
+    private static <T extends Comparable<T>> void sink(T[] a, int k, int N)
     {
         while(2 * k <= N)
         {
             int j = 2 * k;
-            if(j < N && less(j, j + 1)) j++;
-            if(!less(k, j)) break;
-            exch(k, j);
+            if(j < N && less(a, j, j + 1)) j++;
+            if(!less(a, k, j)) break;
+            exch(a, k, j);
             k = j;
         }
     }
 
-    private boolean less(int i, int j)
+    private static <T extends Comparable<T>> boolean less(T[] a, int i, int j)
     {
-        return pq[i].compareTo(pq[j]) < 0;
+        return a[i].compareTo(a[j]) < 0;
     }
 
-    private void exch(int i, int j)
+    private static <T extends Comparable<T>> void exch(T[] a, int i, int j)
     {
-        Key t = pq[i];
-        pq[i]= pq[j];
-        pq[j] = t;
+        T t = a[i];
+        a[i]= a[j];
+        a[j] = t;
     }
 
-    private void swim(int k)
+    public static void main(String[] args)
     {
-        while(k > 1 && less(k/2, k))
+        Date[] dat = new Date[]{null, new Date(1, 1, 2010),
+        new Date(1, 1, 2017), new Date(1, 1, 2015)};
+        Heapsort.sort(dat);
+        for(int i = 1; i < 4; i++)
         {
-            exch(k/2, k);
-            k = k/2;
+            System.out.println(dat[i]);
         }
     }
 

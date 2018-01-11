@@ -1,6 +1,6 @@
 #include <iostream>
 #include "C2/U1/MyDate.h"
-#include "C2/U4/MaxPQ.h"
+#include "C2/U4/Heapsort.h"
 
 using namespace std;
 
@@ -8,24 +8,16 @@ int main(int argc, char ** argv)
 {
     cout << "Hello tester!" << endl;
 
-    MaxPQ * myMaxPQ = new MaxPQ(3);
-    cout << "isEmpty: " << endl;
-    cout << myMaxPQ->isEmpty() << endl;
+    MyDate ** dat = new MyDate*[4];
+    dat[0] = nullptr;
+    dat[0] = new MyDate(1, 1, 2010);
+    dat[1] = new MyDate(1, 1, 2017);
+    dat[2] = new MyDate(1, 1, 2015);
 
-    myMaxPQ->insert(new MyDate(1, 1, 2010));
-    cout << "now size: " << endl;
-    cout << myMaxPQ->size() << endl;
-
-    myMaxPQ->insert(new MyDate(1, 1, 2017));
-    myMaxPQ->insert(new MyDate(1, 1, 2015));
-    cout << "now size: " << endl;
-    cout << myMaxPQ->size() << endl;
-
-
-    MyDate * myDat = dynamic_cast<MyDate *>(myMaxPQ->delMax());
-    cout << "delete Max: " << endl;
-    cout << myDat->toString() << endl;
-    cout << "now size: " << endl;
-    cout << myMaxPQ->size() << endl;
+    Heapsort::sort((Comparable **)dat, 4);
+    for(int i = 1; i < 4; i++)
+    {
+        cout << dat[i]->toString() << endl;
+    }
 }
 
