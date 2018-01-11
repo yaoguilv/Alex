@@ -28,7 +28,7 @@ void Heapsort::sink(Comparable ** a, int k, int N)
 
 bool Heapsort::less(Comparable ** a, int i, int j)
 {
-    return 0 > a[i]->compareTo(a[j]);
+    return a[i]->compareTo(a[j]) < 0;
 }
 
 void Heapsort::exch(Comparable ** a, int i, int j)
