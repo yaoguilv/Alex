@@ -21,7 +21,8 @@ void Heapsort::sink(Comparable ** a, int k, int N)
     {
         int j = 2 * k;
         if(j < N && less(a, j, j + 1)) j++;
-        if(!less(a, k, j));
+        if(!less(a, k, j)) break;
+        exch(a, k, j);
         k = j;
     }
 }

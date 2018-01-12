@@ -1,5 +1,7 @@
 package C3.U1;
 
+import java.util.*;
+
 public class SequentialSearchST<Key, Value> {
     // first node in the linked list
     private Node first;
@@ -42,4 +44,14 @@ public class SequentialSearchST<Key, Value> {
         // Search miss: add new node.
         first = new Node(key, val, first);
     }
+
+    public static void main(String[] args)
+    {
+        SequentialSearchST<Integer, String> myST = new SequentialSearchST<Integer, String>();
+        myST.put(1, "dd");
+        myST.put(3, "gg");
+        myST.put(2, "gew");
+        System.out.println(myST.get(2));
+    }
+
 }
