@@ -92,6 +92,19 @@ public class BST<Key extends Comparable<Key>, Value> {
         return min(x.left);
     }
 
+    public Key max()
+    {
+        return max(root).key;
+    }
+
+    private Node max(Node x)
+    {
+        if(x.right == null)
+            return x;
+        return max(x.right);
+    }
+
+
     public Key floor(Key key)
     {
         Node x = floor(root, key);
@@ -211,31 +224,31 @@ public class BST<Key extends Comparable<Key>, Value> {
         print(x.right);
     }
 
-    // public Iterable<Key> keys()
-    // {
-    //     return keys(min(), max());
-    // }
+    public Iterable<Key> keys()
+    {
+        return keys(min(), max());
+    }
 
-    // public Iterable<Key> keys(Key lo, Key hi)
-    // {
-    //     Queue<Key> queue = new Queue<Key>();
-    //     keys(root, queue, lo, hi);
-    //     return queue;
-    // }
+    public Iterable<Key> keys(Key lo, Key hi)
+    {
+        Queue<Key> queue = new LinkedList<Key>();
+        keys(root, queue, lo, hi);
+        return queue;
+    }
 
-    // private void keys(Node x, Queue<Key> queue, Key lo, Key hi)
-    // {
-    //     if(null == x)
-    //         return;
-    //     int cmplo = lo.comareTo(x.key);
-    //     int cmphi = hi.compareTo(x.key);
-    //     if(cmplo < 0)
-    //         keys(x.left, queue, lo, hi);
-    //     if(cmplo <= 0 && cmphi >= 0)
-    //         queue.enqueue(x.key);
-    //     if(cmphi > 0)
-    //         keys(x.right, queue, lo, hi);
-    // }
+    private void keys(Node x, Queue<Key> queue, Key lo, Key hi)
+    {
+        if(null == x)
+            return;
+        int cmplo = lo.compareTo(x.key);
+        int cmphi = hi.compareTo(x.key);
+        if(cmplo < 0)
+            keys(x.left, queue, lo, hi);
+        if(cmplo <= 0 && cmphi >= 0)
+            queue.add(x.key);
+        if(cmphi > 0)
+            keys(x.right, queue, lo, hi);
+    }
 
     public static void main(String[] args)
     {
@@ -269,6 +282,14 @@ public class BST<Key extends Comparable<Key>, Value> {
         System.out.println("print all Node:");
         myBST.print();
 
+        Iterable<Integer> myIterable = myBST.keys();
+        Iterator<Integer> myIt = myIterable.iterator();
+        System.out.println("now Iterable the tree：");
+        while(myIt.hasNext())
+        {
+            System.out.println(myIt.next());
+        }
+
         System.out.println("now delete min:");
         myBST.deleteMin();
         myBST.print();
@@ -277,6 +298,8 @@ public class BST<Key extends Comparable<Key>, Value> {
         System.out.println("now delete 2:");
         myBST.delete(2);
         myBST.print();
+
+
     }
 
 }

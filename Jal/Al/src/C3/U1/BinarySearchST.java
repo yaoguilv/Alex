@@ -93,28 +93,48 @@ public class BinarySearchST<Key extends Comparable<Key>, Value>
         return keys[i];
     }
 
-    // public Iterable<Key> keys(Key lo, Key hi)
-    // {
-    //     Queue<Key> q = new Queue<Key>();
-    //     for(int i = rank(lo); i < rank(hi); i++)
-    //         q.enqueue(keys[i]);
-    //     if(contain(hi))
-    //         q.enqueue(keys[rank(hi)]);
-    //     return q;
-    // }
+    public Iterable<Key> keys(Key lo, Key hi)
+    {
+        Queue<Key> q = new LinkedList<Key>();
+        for(int i = rank(lo); i < rank(hi); i++)
+            q.add(keys[i]);
+        if(contain(hi))
+            q.add(keys[rank(hi)]);
+        return q;
+    }
+
+    private boolean contain(Key key)
+    {
+        if(keys[rank(key)] == key)
+            return true;
+        else
+            return false;
+    }
 
     public static void main(String[] args)
     {
-        BinarySearchST<Integer, String> myBS = new BinarySearchST<Integer, String>(3);
+        BinarySearchST<Integer, String> myBS = new BinarySearchST<Integer, String>(6);
         System.out.println("now size is:");
         System.out.println(myBS.size());
 
         myBS.put(1, "aaa");
         myBS.put(3, "ccc");
         myBS.put(2, "bbb");
+        myBS.put(6, "aaa");
+        myBS.put(4, "ccc");
+        myBS.put(5, "bbb");
 
         String ret = myBS.get(2);
         System.out.println("second value is:");
         System.out.println(ret);
+
+        Iterable<Integer> myIterable = myBS.keys(2,5);
+        Iterator<Integer> myIt = myIterable.iterator();
+        System.out.println("Iterable 2 to 5:");
+        while(myIt.hasNext())
+        {
+            System.out.println(myIt.next());
+        }
     }
+
 }
