@@ -3,8 +3,8 @@
 template <class Key, class Value>
 class RedBlackBST {
     private:
-        static bool RED = true;
-        static bool BLACK = false;
+        static const bool RED = true;
+        static const bool BLACK = false;
         class Node
         {
             public:
@@ -14,11 +14,13 @@ class RedBlackBST {
             Value val;
             // subtrees
             Node * left;
-                Node * right;
+            Node * right;
             // # nodes in this subtree
+            int N;
+            // color of link from parent to this node
             bool color;
 
-            Node(Key key, Value val, int N, boole color)
+            Node(Key key, Value val, int N, bool color)
             {
                 this->key = key;
                 this->val = val;
@@ -28,11 +30,11 @@ class RedBlackBST {
         };
         Node * root;
 
-        boole isRed(Node * x)
+        bool isRed(Node * x)
         {
             if(nullptr == x)
                 return false;
-            return RED == x.color;
+            return RED == x->color;
         }
 
         Node * rotateLeft(Node * h)
@@ -47,7 +49,7 @@ class RedBlackBST {
             return x;
         }
 
-        Node * rotateRight(Node h)
+        Node * rotateRight(Node * h)
         {
             Node * x = h->left;
             h->left = x->right;
@@ -77,8 +79,8 @@ class RedBlackBST {
         {
             // Do standard insert, with red link to parent.
             if(nullptr == h)
-                return new Node(Key, val, 1, RED);
-            int cmp = key.compareTo(h->key);
+                return new Node(key, val, 1, RED);
+            int cmp = key->compareTo(h->key);
             if(cmp < 0)
                 h->left = put(h->left, key, val);
             else if(cmp > 0)
