@@ -17,8 +17,8 @@ int main(int argc, char ** argv)
     dat[1] = new MyDate(1, 1, 2010);
     dat[2] = new MyDate(1, 1, 2017);
 
-    myBST->put(dat[0], "aaa");
-    myBST->put(dat[1], "bbb");
+    myBST->put(dat[0], "bbb");
+    myBST->put(dat[1], "aaa");
     myBST->put(dat[2], "ccc");
 
     cout << "now size: " << endl;
@@ -28,13 +28,13 @@ int main(int argc, char ** argv)
     cout << myBST->get(dat[1]) << endl;
 
     cout << "min key:" << endl;
-    cout << myBST->min() << endl;
+    cout << myBST->min()->toString() << endl;
 
     cout << "floor of 2015 is:" << endl;
-    cout << myBST->floor(dat[0]);
+    cout << myBST->floor(dat[0])->toString();
 
     cout << "select 2015 :" << endl;
-    cout << myBST->select(dat[0]) << endl;
+    cout << myBST->select(2)->toString() << endl;
 
     cout << "rank of 2017 is :" << endl;
     cout << myBST->rank(dat[2]) << endl;

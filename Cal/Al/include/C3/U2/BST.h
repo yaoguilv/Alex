@@ -1,7 +1,6 @@
 #ifndef BST_H
 #define BST_H
 #include <iostream>
-
 using namespace std;
 
 template <class Key, class Value>
@@ -9,16 +8,16 @@ class BST {
 private:
     class Node
     {
-    private:
+    public:
         // key
         Key key;
         // associated value
         Value val;
         // links to subtrees
-        Node * left, right;
+        Node * left;
+        Node * right;
         // # nodes in subtree rooted here
         int N;
-    public:
         Node(Key key, Value val, int N)
         {
             this->key = key;
@@ -27,7 +26,7 @@ private:
         }
     };
     // root of BST
-    Node root;
+    Node * root;
 
     int size(Node * x)
     {
@@ -114,7 +113,7 @@ private:
             return x;
     }
 
-    int rank(Key * key, Node * x)
+    int rank(Key key, Node * x)
     {
         // Return number of keys less than x.key in the subtree rooted at x.
         if(nullptr == x)
@@ -137,13 +136,13 @@ private:
         return x;
     }
 
-    Node * deleteNode(Node * x, Key * key)
+    Node * deleteNode(Node * x, Key key)
     {
         if(nullptr == x)
             return nullptr;
         int cmp = key->compareTo(x->key);
         if(cmp < 0)
-            x->left = deleteNdoe(x->left, key);
+            x->left = deleteNode(x->left, key);
         else if(cmp > 0)
             x->right = deleteNode(x->right, key);
         else
@@ -166,7 +165,7 @@ private:
         if(nullptr == x)
             return;
         print(x->left);
-        cout << x->key->toString() << x->val << endl;
+        cout << x->key->toString() << "    " << x->val << endl;
         print(x->right);
     }
 
@@ -188,7 +187,7 @@ public:
         root = put(root, key, val);
     }
 
-    Key * min()
+    Key min()
     {
         return min(root)->key;
     }
@@ -198,7 +197,7 @@ public:
         return max(root)->key;
     }
 
-    Key * floor(Key key)
+    Key floor(Key key)
     {
         Node * x = floor(root, key);
         if(nullptr == x)
@@ -206,7 +205,7 @@ public:
         return x->key;
     }
 
-    Key * select(int k)
+    Key select(int k)
     {
         return select(root, k)->key;
     }
