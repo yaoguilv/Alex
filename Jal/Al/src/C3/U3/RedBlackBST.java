@@ -1,6 +1,6 @@
 package C3.U3;
 
-public class RedBlackBST {
+public class RedBlackBST<Key extends Comparable<Key>, Value> {
     private static final boolean RED = true;
     private static final boolean BLACK = false;
 
@@ -72,7 +72,7 @@ public class RedBlackBST {
         return size(root);
     }
 
-    private size(Node x)
+    private int size(Node x)
     {
         if(null == x)
             return 0;
@@ -110,4 +110,49 @@ public class RedBlackBST {
         h.N = size(h.left) + size(h.right) + 1;
         return h;
     }
+
+    public Value get(Key key)
+    {
+        return get(root, key);
+    }
+
+    private Value get(Node x, Key key)
+    {
+        // Return value associated with key in the subtree rooted at x;
+        // return null if key not present in subtree rooted at x.
+        if(x == null) return null;
+        int cmp = key.compareTo(x.key);
+        if(cmp < 0)
+            return get(x.left, key);
+        else if(cmp > 0)
+            return get(x.right, key);
+        else
+            return x.val;
+    }
+
+    public static void main(String[] args)
+    {
+        RedBlackBST<Integer, String> myRB = new RedBlackBST<Integer, String>();
+
+        System.out.println("now size:");
+        System.out.println(myRB.size());
+
+        myRB.put(1, "aaa");
+        myRB.put(3, "ccc");
+        myRB.put(2, "bbb");
+
+        System.out.println("now size:");
+        System.out.println(myRB.size());
+
+        System.out.println("get 2:");
+        System.out.println(myRB.get(2));
+
+        System.out.println("get 1:");
+        System.out.println(myRB.get(1));
+
+        System.out.println("get 3:");
+        System.out.println(myRB.get(3));
+
+    }
+
 }
