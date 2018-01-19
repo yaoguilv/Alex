@@ -1,4 +1,6 @@
 package C3.U4;
+
+import java.util.*;
 import C3.U1.SequentialSearchST;
 
 public class SeparateChainingHashST<Key extends Comparable<Key>, Value> {
@@ -38,5 +40,23 @@ public class SeparateChainingHashST<Key extends Comparable<Key>, Value> {
     public void put(Key key, Value val)
     {
         st[hash(key)].put(key, val);
+    }
+
+    public static void main(String[] args)
+    {
+        SeparateChainingHashST<Integer, String> mySCH = new SeparateChainingHashST<Integer, String>();
+
+        mySCH.put(1, "aaa");
+        mySCH.put(3, "ccc");
+        mySCH.put(2, "bbb");
+
+        System.out.println("get 2:");
+        System.out.println(mySCH.get(2));
+
+        System.out.println("get 1:");
+        System.out.println(mySCH.get(1));
+
+        System.out.println("get 3:");
+        System.out.println(mySCH.get(3));
     }
 }

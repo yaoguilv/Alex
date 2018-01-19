@@ -38,3 +38,8 @@ string MyDate::toString()
 {
     return to_string(month) + "/" + to_string(day) + "/" + to_string(year);
 }
+
+int MyDate::hashCode()
+{
+    return this->year + this->month + this->day;
+}

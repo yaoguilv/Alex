@@ -15,4 +15,6 @@ class MyDate : public Comparable {
         int getYear();
         int compareTo(Comparable * that);
         string toString();
+
+        int hashCode();
 };
