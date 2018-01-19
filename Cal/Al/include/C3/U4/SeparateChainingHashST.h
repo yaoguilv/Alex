@@ -19,15 +19,9 @@ class SeparateChainingHashST {
         }
 
     public:
-        SeparateChainingHashST()
-        {
-            SeparateChainingHashST(997);
-        }
-
-        SeparateChainingHashST(int M)
+        SeparateChainingHashST(int inM = 997) : M(inM)
         {
             // Create M linked lists;
-            this->M = M;
             st = new SequentialSearchST<Key, Value>*[M];
             for(int i = 0; i < M; i++)
                 st[i] = new SequentialSearchST<Key, Value>();
