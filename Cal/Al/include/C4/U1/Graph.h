@@ -1,80 +1,63 @@
 #ifndef GRAPH_H
 #define GRAPH_H
+#include "C1/Unit3_Stacks/Bag.h"
+#include <string>
+
+using namespace std;
+
 class Graph {
-    // number of vertices
-    private final int V;
-    // number of edges
-    private int E;
-    // adjacency lists
-    private Bag<Integer>[] adj;
+    private:
+        // number of vertices
+        int V;
+        // number of edges
+        int E;
+        // adjancency lists
+        Bag<int> * adj;
 
-    @SuppressWarnings("unchecked")
-    public Graph(int V)
-    {
-        this.V = V;
-        this.E = 0;
-        // Create array of lists.
-        adj = (Bag<Integer>[]) new Bag<?>[V];
-        // Initialize all lists
-        for(int v = 0; v < V; v++)
-            // to empty
-            adj[v] = new Bag<Integer>();
-    }
-
-    public Graph(StdLib.In in)
-    {
-        // Read V adn construct this graph.
-        this(in.readInt());
-        // Read E.
-        int E = in.readInt();
-        for(int i = 0; i < E; i++)
+    public:
+        Graph(int V)
         {
-            // Add an edge
-            // Read a vertex,
-            int v = in.readInt();
-            // read another vertex,
-            int w = in.readInt();
-            // and add edge connecting them.
-            addEdge(v, w);
+            this->V = V;
+            this->E = 0;
+            // Create array of lists.
+            adj = new Bag<int>[V];
+            // Initialize all lists
+            for(int v = 0; v < V; v++)
+                // to empty
+                adj[v] = new Bag<int>();
         }
-    }
 
-    public int V()
+    int getV()
     {
         return V;
     }
 
-    public int E()
+    int getE()
     {
         return E;
     }
 
-    public void addEdge(int v, int w)
+    void addEdge(int v, int w)
     {
         // Add w to v's list.
-        adj[v].add(w);
+        adj[v]->add(w);
         // Add v to w's list.
-        adj[w].add(v);
+        adj[w]->add(v).
         E++;
     }
 
-    public Iterable<Integer> adj(int v)
-    {
-        return adj[v];
-    }
-
-    public static int degree(Graph G, int v)
+    static int degree(Graph * G, int v)
     {
         int degree = 0;
-        for(int w : G.adj(v))
+        for(auto w : G->adj(v))
             degree++;
         return degree;
     }
 
-    public static int maxDegere(Graph G)
+    static int maxDegree(Graph * G)
     {
         int max = 0;
-        for(int v = 0; v < G.V(); v++)
+        for(int v = 0; v < G->V(); v++)
         {
             if(degree(G, v) > max)
                 max = degree(G, v);
@@ -82,33 +65,32 @@ class Graph {
         return max;
     }
 
-    public static int avgDegree(Graph G)
+    static int avgDegree(Graph * G)
     {
-        return 2 * G.E() / G.V();
+        return 2 * G->E() / G->V();
     }
 
-    public static int numberOfSelfLoops(Graph G)
+    static int numberOfSelfLoops(Graph * G)
     {
         int count = 0;
-        for(int v = 0; v < G.V(); v++)
-            for(int w : G.adj(v))
+        for(int v = 0; v < G->V(); v++)
+            for(auto w : G->adj[v])
                 if(v == w) count++;
         // each edge counted twice
         return count/2;
     }
 
-    public String toString()
+    string toString()
     {
-        String s = V + " vertices, " + E + " edges\n";
+        string s = V + " vertices, " + E + " edges\n";
         for(int v = 0; v < V; v++)
         {
             s += v + ": ";
-            for(int w : this.adj(v))
+            for(auto w : this->adj[v])
                 s += w + " ";
             s += "\n";
         }
         return s;
     }
-
 };
 #endif

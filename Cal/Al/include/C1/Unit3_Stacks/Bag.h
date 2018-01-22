@@ -18,7 +18,7 @@ public:
 template<class T>
 Bag<T>::Bag()
 {
-    first = NULL;
+    first = nullptr;
 }
 
 template<class T>
@@ -33,5 +33,5 @@ void Bag<T>::add(T item)
 template<class T>
 bool Bag<T>::isEmpty()
 {
-    return NULL == this->first;
+    return nullptr == this->first;
 }
