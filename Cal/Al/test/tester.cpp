@@ -1,27 +1,21 @@
 #include <iostream>
 #include <string>
 #include "C2/U1/MyDate.h"
-#include "C3/U4/SeparateChainingHashST.h"
+#include "C4/U1/Graph.h"
 
 using namespace std;
 
 int main(int argc, char ** argv)
 {
-    SeparateChainingHashST<MyDate*, string> * mySCH = new SeparateChainingHashST<MyDate*, string>();
-
-    MyDate ** dat = new MyDate*[3];
-    dat[0] = new MyDate(1, 1, 2015);
-    dat[1] = new MyDate(1, 1, 2010);
-    dat[2] = new MyDate(1, 1, 2017);
-
-    mySCH->put(dat[0], "bbb");
-    mySCH->put(dat[1], "aaa");
-    mySCH->put(dat[2], "ccc");
-
-    cout << "key 2010's value is:" << endl;
-    cout << mySCH->get(dat[1]) << endl;
-    cout << "key 2015's value is:" << endl;
-    cout << mySCH->get(dat[0]) << endl;
-    cout << "key 2017's value is:" << endl;
-    cout << mySCH->get(dat[2]) << endl;
+    Graph myG = new Graph(7);
+    myG.addEdge(0, 1);
+    myG.addEdge(0, 2);
+    myG.addEdge(0, 5);
+    myG.addEdge(0, 6);
+    myG.addEdge(5, 3);
+    myG.addEdge(5, 4);
+    myG.addEdge(3, 4);
+    myG.addEdge(4, 6);
+    String outContext = myG.toString();
+    System.out.print(outContext);
 }
