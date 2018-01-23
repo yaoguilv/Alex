@@ -2,6 +2,7 @@ package test;
 
 import java.util.*;
 import C4.U1.Graph;
+import C4.U1.DepthFirstSearch;
 
 public class Tester {
     public static void main(String[] args)
@@ -17,5 +18,14 @@ public class Tester {
         myG.addEdge(4, 6);
         String outContext = myG.toString();
         System.out.print(outContext);
+
+        int s = 0;
+        DepthFirstSearch myDFS = new DepthFirstSearch(myG, s);
+
+        for(int v = 0; v < myG.V(); v++)
+            if(myDFS.marked(v))
+                StdLib.StdOut.print(v + " ");
+        StdLib.StdOut.println();
+
     }
 }

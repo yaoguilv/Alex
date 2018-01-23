@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "C4/U1/Graph.h"
+#include "C4/U1/DepthFirstSearch.h"
 
 using namespace std;
 

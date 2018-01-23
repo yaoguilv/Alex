@@ -1,6 +1,9 @@
+#ifndef BAG_H
+#define BAG_H
+
 template<class T>
 class Bag {
-private:
+public:
     class Node
     {
     public:
@@ -8,7 +11,6 @@ private:
         Node * next;
     };
     Node * first;
-public:
     Bag();
     ~Bag();
     void add(T item);
@@ -35,3 +37,4 @@ bool Bag<T>::isEmpty()
 {
     return nullptr == this->first;
 }
+#endif
