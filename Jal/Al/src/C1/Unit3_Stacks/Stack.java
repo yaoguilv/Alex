@@ -1,15 +1,18 @@
 package C1.Unit3_Stacks;
 
-public class Stack<Item>
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class Stack<Item> implements Iterable<Item>
 {
-    private Node first; // top of stack (most recently addeed node)
+    private Node<Item> first; // top of stack (most recently addeed node)
     private int N;
 
-    private class Node
+    private class Node<Item>
     {
         // nested class to define nodes
         Item item;
-        Node next;
+        Node<Item> next;
     }
 
     public boolean isEmpty() { return first == null; } // Or : N == 0.
@@ -18,8 +21,8 @@ public class Stack<Item>
     public void push(Item item)
     {
         // Add item to top of stack.
-        Node oldfirst = first;
-        first = new Node();
+        Node<Item> oldfirst = first;
+        first = new Node<Item>();
         first.item = item;
         first.next = oldfirst;
         N++;
@@ -32,6 +35,34 @@ public class Stack<Item>
         first = first.next;
         N--;
         return item;
+    }
+
+    public Iterator<Item> iterator() {
+        return new ListIterator<Item>(first);
+    }
+
+    // an iterator, doesn't implement remove() since it's optional
+    private class ListIterator<Item> implements Iterator<Item> {
+        private Node<Item> current;
+
+        public ListIterator(Node<Item> first) {
+            current = first;
+        }
+
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+        public Item next() {
+            if (!hasNext()) throw new NoSuchElementException();
+            Item item = current.item;
+            current = current.next;
+            return item;
+        }
     }
 
     public static void main(String[] args) {

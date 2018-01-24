@@ -2,7 +2,7 @@ package test;
 
 import java.util.*;
 import C4.U1.Graph;
-import C4.U1.DepthFirstSearch;
+import C4.U1.DepthFirstPaths;
 
 public class Tester {
     public static void main(String[] args)
@@ -20,12 +20,15 @@ public class Tester {
         System.out.print(outContext);
 
         int s = 0;
-        DepthFirstSearch myDFS = new DepthFirstSearch(myG, s);
-
+        DepthFirstPaths search = new DepthFirstPaths(myG, s);
         for(int v = 0; v < myG.V(); v++)
-            if(myDFS.marked(v))
-                StdLib.StdOut.print(v + " ");
-        StdLib.StdOut.println();
-
+        {
+            StdLib.StdOut.print(s + " to " + v + ": ");
+            if(search.hasPathTo(v))
+                for(int x : search.pathTo(v))
+                    if(x == s) StdLib.StdOut.print(x);
+                    else StdLib.StdOut.print("-" + x);
+            StdLib.StdOut.println();
+        }
     }
 }

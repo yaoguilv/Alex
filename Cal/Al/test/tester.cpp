@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "C4/U1/Graph.h"
+#include "C4/U1/DepthFirstPaths.h"
 
 using namespace std;
 
@@ -24,4 +25,17 @@ int main(int argc, char ** argv)
         if(myDFS->getMarked(v))
             cout << to_string(v) << " ";
     cout << endl;
+
+    int s = 0;
+    DepthFirstPaths search = new DepthFirstPaths(myG, s);
+    for(int v = 0; v < myG.V(); v++)
+    {
+        StdLib.StdOut.print(s + " to " + v + ": ");
+        if(search.hasPathTo(v))
+            for(int x : search.pathTo(v))
+                if(x == s) StdLib.StdOut.print(x);
+                else StdLib.StdOut.print("-" + x);
+        StdLib.StdOut.println();
+    }
+
 }
