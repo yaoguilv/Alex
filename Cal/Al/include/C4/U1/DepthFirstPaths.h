@@ -1,46 +1,51 @@
 #ifndef DEPTHFIRSTPATHS_H
 #define DEPTHFIRSTPATHS_H
-class DepthFirstPaths {
-    // Has dfs() been called for this vertex?
-    private boolean[] marked;
-    // last vertex on known path to this vertex
-    private int[] edgeTo;
-    // source
-    private final int s;
 
-    public DepthFirstPaths(Graph G, int s)
+#include "C1/Unit3_Stacks/Bag.h"
+#include "C4/U1/Graph.h"
+#include "C1/Unit3_Stacks/Stack.h"
+
+class DepthFirstPaths {
+private:
+    // Has dfs() been called for this vertex?
+    bool * marked;
+    // last vertex on known path to this vertex
+    int * edgeTo;
+    // source
+    int s;
+
+    void dfs(Graph * G, int v)
     {
-        marked = new boolean[G.V()];
-        edgeTo = new int[G.V()];
-        this.s = s;
+        marked[v] = true;
+        for(Bag<int>::Node * myIt = G->adj[v]->first; myIt != nullptr; myIt = myIt->next)
+            if(!marked[myIt->item])
+            {
+                edgeTo[myIt->item] = v;
+                dfs(G, myIt->item);
+            }
+    }
+public:
+    DepthFirstPaths(Graph * G, int s)
+    {
+        marked = new bool[G->getV()];
+        edgeTo = new int[G->getV()];
+        this->s = s;
         dfs(G, s);
     }
 
-    private void dfs(Graph G, int v)
-    {
-        marked[v] = true;
-        for(int w : G.adj(v))
-            if(!marked[w])
-            {
-                edgeTo[w] = v;
-                dfs(G, w);
-            }
-    }
-
-    public boolean hasPathTo(int v)
+    bool hasPathTo(int v)
     {
         return marked[v];
     }
 
-    public Iterable<Integer> pathTo(int v)
+    Stack<int> * pathTo(int v)
     {
-        if(!hasPathTo(v)) return null;
-        Stack<Integer> path = new Stack<Integer>();
+        if(!hasPathTo(v)) return nullptr;
+        Stack<int> * path = new Stack<int>();
         for(int x = v; x != s; x = edgeTo[x])
-            path.push(x);
-        path.push(s);
-        return (Iterable<Integer>)path;
+            path->push(x);
+        path->push(s);
+        return path;
     }
-
 };
 #endif

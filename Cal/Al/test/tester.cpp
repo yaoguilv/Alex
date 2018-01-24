@@ -2,6 +2,7 @@
 #include <string>
 #include "C4/U1/Graph.h"
 #include "C4/U1/DepthFirstPaths.h"
+#include "C1/Unit3_Stacks/Stack.h"
 
 using namespace std;
 
@@ -20,22 +21,20 @@ int main(int argc, char ** argv)
     cout << outContext << endl;
 
     int s = 0;
-    DepthFirstSearch * myDFS = new DepthFirstSearch(myG, s);
+    DepthFirstPaths * search = new DepthFirstPaths(myG, s);
     for(int v = 0; v < myG->getV(); v++)
-        if(myDFS->getMarked(v))
-            cout << to_string(v) << " ";
-    cout << endl;
-
-    int s = 0;
-    DepthFirstPaths search = new DepthFirstPaths(myG, s);
-    for(int v = 0; v < myG.V(); v++)
     {
-        StdLib.StdOut.print(s + " to " + v + ": ");
-        if(search.hasPathTo(v))
-            for(int x : search.pathTo(v))
-                if(x == s) StdLib.StdOut.print(x);
-                else StdLib.StdOut.print("-" + x);
-        StdLib.StdOut.println();
+        cout << to_string(s) << " to " + to_string(v) + ": ";
+        if(search->hasPathTo(v))
+        {
+            Stack<int> * resultStack = search->pathTo(v);
+            while(!resultStack->isEmpty())
+            {
+                int x = resultStack->pop();
+                if(x == s) cout << x;
+                else cout << "-" << to_string(x);
+            }
+        }
+        cout << endl;
     }
-
 }
