@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include "C4/U1/Graph.h"
-#include "C4/U1/DepthFirstPaths.h"
 #include "C1/Unit3_Stacks/Stack.h"
+#include "C4/U1/BreadthFirstPaths.h"
 
 using namespace std;
 
@@ -21,7 +21,7 @@ int main(int argc, char ** argv)
     cout << outContext << endl;
 
     int s = 0;
-    DepthFirstPaths * search = new DepthFirstPaths(myG, s);
+    BreadthFirstPaths * search = new BreadthFirstPaths(myG, s);
     for(int v = 0; v < myG->getV(); v++)
     {
         cout << to_string(s) << " to " + to_string(v) + ": ";

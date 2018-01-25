@@ -20,7 +20,7 @@ public class Tester {
         System.out.print(outContext);
 
         int s = 0;
-        DepthFirstPaths search = new DepthFirstPaths(myG, s);
+        BreadthFirstPaths search = new BreadthFirstPaths(myG, s);
         for(int v = 0; v < myG.V(); v++)
         {
             StdLib.StdOut.print(s + " to " + v + ": ");
