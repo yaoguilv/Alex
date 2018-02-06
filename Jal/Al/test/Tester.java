@@ -9,7 +9,7 @@ public class Tester {
     @SuppressWarnings("unchecked")
     public static void main(String[] args)
     {
-        Graph myG = new Graph(7);
+        Graph myG = new Graph(13);
         myG.addEdge(0, 1);
         myG.addEdge(0, 2);
         myG.addEdge(0, 5);
@@ -18,11 +18,11 @@ public class Tester {
         myG.addEdge(5, 4);
         myG.addEdge(3, 4);
         myG.addEdge(4, 6);
-        // myG.addEdge(7, 8);
-        // myG.addEdge(9, 10);
-        // myG.addEdge(9, 11);
-        // myG.addEdge(9, 12);
-        // myG.addEdge(11, 12);
+        myG.addEdge(7, 8);
+        myG.addEdge(9, 10);
+        myG.addEdge(9, 11);
+        myG.addEdge(9, 12);
+        myG.addEdge(11, 12);
         String outContext = myG.toString();
         System.out.print(outContext);
 
