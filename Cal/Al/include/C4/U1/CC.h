@@ -15,8 +15,8 @@ class CC {
             marked[v] = true;
             id[v] = count;
             for(Bag<int>::Node * myIt = G->adj[v]->first; myIt != nullptr; myIt = myIt->next)
-                if(!marked[w])
-                    dfs(G, w);
+                if(!marked[myIt->item])
+                    dfs(G, myIt->item);
         }
 
     public:

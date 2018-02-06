@@ -28,40 +28,19 @@ int main(int argc, char ** argv)
     cout << outContext << endl;
 
     CC * cc = new CC(myG);
-    int M = cc.count();
+    int M = cc->getCount();
     cout << M << " components" << endl;
 
-    // refer:
-    /* int s = 0; */
-    /* BreadthFirstPaths * search = new BreadthFirstPaths(myG, s); */
-    /* for(int v = 0; v < myG->getV(); v++) */
-    /* { */
-    /*     cout << to_string(s) << " to " + to_string(v) + ": "; */
-    /*     if(search->hasPathTo(v)) */
-    /*     { */
-    /*         Stack<int> * resultStack = search->pathTo(v); */
-    /*         while(!resultStack->isEmpty()) */
-    /*         { */
-    /*             int x = resultStack->pop(); */
-    /*             if(x == s) cout << x; */
-    /*             else cout << "-" << to_string(x); */
-    /*         } */
-    /*     } */
-    /*     cout << endl; */
-    /* } */
-
-        // java:
-        Bag<Integer>[] components;
-        components = (Bag<Integer>[]) new Bag<?>[M];
-        for(int i = 0; i < M; i++)
-            components[i] = new Bag<Integer>();
-        for(int v = 0; v < myG.V(); v++)
-            components[cc.id(v)].add(v);
-        for(int i = 0; i < M; i++)
-        {
-            for(int v : components[i])
-                StdLib.StdOut.print(v + " ");
-            StdLib.StdOut.println();
-        }
-
+    Bag<int> ** components;
+    components = new Bag<int>*[M];
+    for(int i = 0; i < M; i++)
+        components[i] = new Bag<int>();
+    for(int v = 0; v < myG->getV(); v++)
+        components[cc->getId(v)]->add(v);
+    for(int i = 0; i < M; i++)
+    {
+        for(Bag<int>::Node * myIt = components[i]->first; myIt != nullptr; myIt = myIt->next)
+            cout << myIt->item << " ";
+        cout << endl;
+    }
 }
