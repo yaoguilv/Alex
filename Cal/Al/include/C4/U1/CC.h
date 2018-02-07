@@ -8,7 +8,7 @@ class CC {
     private:
         bool * marked;
         int * id;
-        int count;
+        int count = 0;
 
         void dfs(Graph * G, int v)
         {
@@ -43,7 +43,7 @@ class CC {
             return id[v];
         }
 
-        int getCcount()
+        int getCount()
         {
             return count;
         }

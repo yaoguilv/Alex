@@ -21,10 +21,10 @@ $(TARGET): $(OBJECTS)
 	@echo " Linking..."
 	@echo " $(CC) $^ -shared -o $(TARGET) $(LIB)";
 	@$(CC) $^ -shared -o $(TARGET) $(LIB)
-	@echo "cp $(TARGET) ../AlgorithmsYaoguilv/lib/"
-	@cp $(TARGET) ../AlgorithmsYaoguilv/lib/
-	@echo "cp ./include/* ../AlgorithmsYaoguilv/include/"
-	@cp ./include/* ../AlgorithmsYaoguilv/include/
+	@echo "cp $(TARGET) ../Al/lib/"
+	@cp $(TARGET) ../Al/lib/
+	@echo "cp ./include/* ../Al/include/"
+	@cp ./include/* ../Al/include/
 	@echo "sudo cp $(TARGET) /usr/lib/"
 	@sudo cp $(TARGET) /usr/lib/
 
