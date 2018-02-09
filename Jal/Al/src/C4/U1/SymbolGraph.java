@@ -14,13 +14,13 @@ public class SymbolGraph {
     public SymbolGraph(String stream, String sp)
     {
         st = new ST<String, Integer>();
-        // First pass
-        In in = new In(stream);
+        // First pass:
         // builds the index by reading strings to associate each distinct string with an index.
+        In in = new In(stream);
         while(in.hasNextLine())
         {
             String[] a = in.readLine().split(sp);
-                    st.put(a[i], st.size());
+            st.put(a[i], st.size());
         }
         // Inverted index to get string keys is an array.
         keys = new String[st.size()];
