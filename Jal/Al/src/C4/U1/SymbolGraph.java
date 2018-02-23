@@ -1,11 +1,11 @@
 package C4.U1;
 
-import C3.U1.BinarySearchST;
+import C3.U1.SequentialSearchST;
 import StdLib.In;
 
 public class SymbolGraph {
     // String -> index
-    private ST<String, Integer> st;
+    private SequentialSearchST<String, Integer> st;
     // index -> String
     private String[] keys;
     // the graph
@@ -13,14 +13,15 @@ public class SymbolGraph {
 
     public SymbolGraph(String stream, String sp)
     {
-        st = new ST<String, Integer>();
+        st = new SequentialSearchST<String, Integer>();
         // First pass:
         // builds the index by reading strings to associate each distinct string with an index.
         In in = new In(stream);
         while(in.hasNextLine())
         {
             String[] a = in.readLine().split(sp);
-            st.put(a[i], st.size());
+            for(int i = 0; i < a.length; i++)
+                st.put(a[i], st.size());
         }
         // Inverted index to get string keys is an array.
         keys = new String[st.size()];
