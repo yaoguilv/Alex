@@ -17,7 +17,7 @@ public class Tester {
         while(StdLib.StdIn.hasNextLine())
         {
             String source = StdLib.StdIn.readLine();
-            for(int w : G.adj(sg.index(srouce)))
+            for(int w : G.adj(sg.index(source)))
                 StdLib.StdOut.println("  " + sg.name(w));
         }
     }

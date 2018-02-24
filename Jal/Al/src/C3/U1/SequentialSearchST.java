@@ -36,7 +36,7 @@ public class SequentialSearchST<Key, Value> {
         // Search for key, Update value if found; grow table if new.
         for(Node x = first; x != null; x = x.next)
             if(key.equals(x.key))
-            // Search hit: update val.
+                // Search hit: update val.
             {
                 x.val = val;
                 return;
@@ -44,6 +44,44 @@ public class SequentialSearchST<Key, Value> {
         // Search miss: add new node.
         first = new Node(key, val, first);
     }
+
+    public int size()
+    {
+        int mySize = 0;
+        for(Node x = first; x != null; x = x.next)
+            mySize++;
+        return mySize;
+
+    }
+
+    /**
+      * Returns all keys in the symbol table as an {@code Iterable}.
+      * To iterate over all of the keys in the symbol table named {@code st},
+      * use the foreach notation: {@code for (Key key : st.keys())}.
+      *
+      * @return all keys in the symbol table
+      */
+    public Iterable<Key> keys()  {
+        LinkedList<Key> queue = new LinkedList<Key>();
+        for (Node x = first; x != null; x = x.next)
+            queue.add(x.key);
+        return queue;
+    }
+
+    /**
+     * Returns true if this symbol table contains the specified key.
+     *
+     * @param  key the key
+     * @return {@code true} if this symbol table contains {@code key};
+     *         {@code false} otherwise
+     * @throws IllegalArgumentException if {@code key} is {@code null}
+     */
+    public boolean contains(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to contains() is null");
+        return get(key) != null;
+    }
+
+
 
     public static void main(String[] args)
     {
