@@ -21,7 +21,8 @@ public class SymbolGraph {
         {
             String[] a = in.readLine().split(sp);
             for(int i = 0; i < a.length; i++)
-                st.put(a[i], st.size() - 1);
+                if(!st.contains(a[i]))
+                    st.put(a[i], st.size() - 1);
         }
         // Inverted index to get string keys is an array.
         keys = new String[st.size()];
