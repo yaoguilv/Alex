@@ -1,17 +1,27 @@
-package C4.U1;
+#ifndef SYMBOLGRAPH_H
+#define SYMBOLGRAPH_H
+#include <string>
+#include "C4/U1/Graph.h"
 
-import C4.U1.Graph;
-import C3.U1.SequentialSearchST;
-import StdLib.In;
+using namespace std;
 
-public class SymbolGraph {
-    // String -> index
-    private SequentialSearchST<String, Integer> st;
-    // index -> String
-    private String[] keys;
-    // the graph
-    private Graph G;
+class SymbolGraph {
+    private:
+        // String -> index
+        SequentialSearchST<string, int> * st;
+        // index -> string
+        string* keys;
+        // the graph
+        Graph * G;
 
+    public:
+        SymbolGraph(string stream, string sp)
+        {
+            st = new SequentialSearchST<string, int>();
+            // First pass:
+            // builds the index by reading strings to associate each distinct string with an index.
+
+        }
     public SymbolGraph(String stream, String sp)
     {
         st = new SequentialSearchST<String, Integer>();
@@ -63,40 +73,5 @@ public class SymbolGraph {
         return G;
     }
 
-/******************************************************************************
- *  Compilation:  javac SymbolGraph.java
- *  Execution:    java SymbolGraph filename.txt delimiter
- *  Dependencies: ST.java Graph.java In.java StdIn.java StdOut.java
- *  Data files:   https://algs4.cs.princeton.edu/41graph/routes.txt
- *
- *  %  java SymbolGraph routes.txt " "
- *  JFK
- *     MCO
- *     ATL
- *     ORD
- *  LAX
- *     PHX
- *     LAS
- *
- *  Assumes that input file is encoded using UTF-8.
- *  % iconv -f ISO-8859-1 -t UTF-8 movies-iso8859.txt > movies.txt
- *
- ******************************************************************************/
-
-    public static void main(String[] args)
-    {
-        String filename = args[0];
-        String delim = args[1];
-        SymbolGraph sg = new SymbolGraph(filename, delim);
-
-        Graph G = sg.G();
-
-        while(StdLib.StdIn.hasNextLine())
-        {
-            String source = StdLib.StdIn.readLine();
-            for(int w : G.adj(sg.index(source)))
-                StdLib.StdOut.println("  " + sg.name(w));
-        }
-    }
-
-}
+};
+#endif
