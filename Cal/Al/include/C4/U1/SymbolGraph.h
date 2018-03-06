@@ -1,77 +1,95 @@
 #ifndef SYMBOLGRAPH_H
 #define SYMBOLGRAPH_H
+#include <fstream>
+#include <stdlib.h>
+#include <iostream>
 #include <string>
 #include "C4/U1/Graph.h"
 
 using namespace std;
 
 class SymbolGraph {
-    private:
-        // String -> index
-        SequentialSearchST<string, int> * st;
-        // index -> string
-        string* keys;
-        // the graph
-        Graph * G;
+private:
+    // String -> index
+    SequentialSearchST<string, int> * st;
+    // index -> string
+    string* keys;
+    // the graph
+    Graph * G;
 
-    public:
-        SymbolGraph(string stream, string sp)
-        {
-            st = new SequentialSearchST<string, int>();
-            // First pass:
-            // builds the index by reading strings to associate each distinct string with an index.
-
-        }
-    public SymbolGraph(String stream, String sp)
+public:
+    SymbolGraph(string stream, string sp)
     {
-        st = new SequentialSearchST<String, Integer>();
+        st = new SequentialSearchST<string, int>();
         // First pass:
         // builds the index by reading strings to associate each distinct string with an index.
-        In in = new In(stream);
-        while(in.hasNextLine())
+        char buf[256];
+        ifstream inputFile;
+        inputFile.open(stream, ifstream::read);
+        if(inputFile.is_open())
+            cout << "open failed!" << endl;
+        else
         {
-            String[] a = in.readLine().split(sp);
-            for(int i = 0; i < a.length; i++)
-                if(!st.contains(a[i]))
-                    st.put(a[i], st.size());
+            while(!inputFile.eof())
+            {
+                inputFile.getline(buf, 100);
+                string strToSplit = buf;
+                int sperateIndex = strToSplit.find(sp);
+                string strOne = strToSplit.substr(0, sperateIndex);
+                string strTwo = strToSplit.substr(sperateIndex);
+                if(!st->contains(strOne))
+                    st->put(strOne, st->size());
+                if(!st->contains(strTwo))
+                    st->put(strTwo, st->size());
+            }
+            inputFile.close();
         }
+
         // Inverted index to get string keys is an array.
-        keys = new String[st.size()];
-        for(String name : st.keys())
-            keys[st.get(name)] = name;
+        keys = new string[st->size];
+        for(auto name : st.keys())
+            keys[st->get(name)] = name;
 
-        G = new Graph(st.size());
-        // Second pass : builds the graph by connecting the firsrt vertex on eachline
+        G = new Graph(st->size());
+
+        // second pass : builds the graph by connecting the first vertex on eachline
         // to all the others.
-        in = new In(stream);
-        while(in.hasNextLine())
+        inputFile.open(stream, ifstream::read);
+        if(inputFile.is_open())
+            cout << "open failed!" << endl;
+        else
         {
-            String[] a = in.readLine().split(sp);
-            int v = st.get(a[0]);
-            for(int i = 1; i < a.length; i++)
-                G.addEdge(v, st.get(a[i]));
+            while(!inputFile.eof())
+            {
+                inputFile.getline(buf, 100);
+                string strToSplit = buf;
+                int sperateIndex = strToSplit.find(sp);
+                string strOne = strToSplit.substr(0, sperateIndex);
+                string strTwo = strToSplit.substr(sperateIndex);
+                G->addEdge(st->get(strOne), st->get(strTwo));
+            }
+            inputFile.close();
         }
     }
 
-    public boolean contains(String s)
+    bool contains(string s)
     {
-        return st.contains(s);
+        return st->contains(s);
     }
 
-    public int index(String s)
+    int index(string s)
     {
-        return st.get(s);
+        return st->get(s);
     }
 
-    public String name(int v)
+    string name(int v)
     {
         return keys[v];
     }
 
-    public Graph G()
+    Graph * G()
     {
         return G;
     }
-
 };
 #endif

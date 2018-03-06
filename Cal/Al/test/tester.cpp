@@ -37,4 +37,20 @@ int main(int argc, char ** argv)
     cout << "myG2 is Bipartite:" << endl;
     TwoColor * myTwoColor2 = new TwoColor(myG2);
     cout << myTwoColor2->isBipartite() << endl;
+
+    string fileName = argv[0];
+    string delim = argv[1];
+    SymbolGraph * sg = new SymbolGraph(fileName, delim);
+
+    Graph * G = sg->G();
+
+    string inputStr;
+    cin >> inputStr;
+    while(nullptr != inputStr)
+    {
+        string source = inputStr;
+        for(auto w : G->adj(sg->index(source)))
+            cout << "  " + sg->name(w);
+        cin >> inputStr;
+    }
 }
