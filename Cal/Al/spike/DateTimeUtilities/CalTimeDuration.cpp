@@ -15,6 +15,7 @@ int main()
     cout << "f(42) = " << fibonacci(42) << endl;
     // below code is equal to : chrono::time_point<chrono::system_clock>
     chrono::system_clock::time_point end = chrono::system_clock::now();
+    // time_point class override the "-" operator, make the return type as duration<?>
     chrono::duration<double> elapsed_seconds = end - start;
 
     cout << "elapsed time : " << elapsed_seconds.count() << endl;

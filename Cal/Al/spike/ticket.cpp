@@ -1,27 +1,32 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#include <iterator>
-#include <chrono>
 
 using namespace std;
-using namespace chrono;
 
-int fibonacci(int n)
+class A
 {
-    if(n < 2)
-        return n;
-    else
-        return fibonacci(n - 1) + fibonacci(n -2);
-}
+public:
+    virtual int getN() = 0;
+};
+
+class B : public A
+{
+    /* public: */
+public:
+        int getN()
+        {
+            return 3;
+        }
+
+    int getM()
+    {
+        return 2;
+    }
+};
 
 int main(int argc, char ** argv)
 {
-    system_clock::time_point start = system_clock::now();
-    fibonacci(42);
-    system_clock::time_point end = system_clock::now();
-    duration<double> elapsed_seconds = end - start;
-    cout << elapsed_seconds.count() << endl;
-
+    B * myB = new B();
+    cout << myB->getN() << endl;
+    cout << myB->getM() << endl;
     return 0;
 }

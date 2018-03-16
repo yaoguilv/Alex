@@ -7,6 +7,9 @@ class Comparable
 public:
     // here must have a function body "{}"
     // or compile error will appear: undifined reference to "vtable for Comparable"
+    //
+    // this is virtual function, not pure virtual function;
+    // pure function is : virtual int compareTo(Comparable * that) = 0;
     virtual int compareTo(Comparable * that) {};
 };
 
