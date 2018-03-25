@@ -1,32 +1,19 @@
 #include <iostream>
+#include <vector>
+#include <iterator>
 
 using namespace std;
 
-class A
-{
-public:
-    virtual int getN() = 0;
-};
-
-class B : public A
-{
-    /* public: */
-public:
-        int getN()
-        {
-            return 3;
-        }
-
-    int getM()
-    {
-        return 2;
-    }
-};
-
 int main(int argc, char ** argv)
 {
-    B * myB = new B();
-    cout << myB->getN() << endl;
-    cout << myB->getM() << endl;
+    vector<int> foo(3);
+    int myArr[] = {1, 2, 3};
+    copy(myArr, myArr + 3, foo.begin());
+    for(vector<int>::iterator it = foo.begin(); it != foo.end(); ++it)
+    {
+        cout << *it << "  ";
+    }
+
+    cout << endl;
     return 0;
 }
