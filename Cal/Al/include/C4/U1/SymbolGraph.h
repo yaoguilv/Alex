@@ -7,22 +7,23 @@
 #include "C4/U1/Graph.h"
 #include "C3/U1/SequentialSearchST.h"
 #include "C2/U1/MyString.h"
+#include "C2/U1/MyInt.h"
 
 using namespace std;
 
 class SymbolGraph {
 private:
     // String -> index
-    SequentialSearchST<MyString *, int> * st;
+    SequentialSearchST<MyString *, MyInt *> * st;
     // index -> string
-    MyString * keys;
+    MyString ** keys;
     // the graph
     Graph * G;
 
 public:
     SymbolGraph(string stream, string sp)
     {
-        st = new SequentialSearchST<MyString *, int>();
+        st = new SequentialSearchST<MyString *, MyInt *>();
         // First pass:
         // builds the index by reading strings to associate each distinct string with an index.
         char buf[256];
@@ -42,24 +43,29 @@ public:
                 MyString * pStrOne = new MyString(strOne);
                 MyString * pStrTwo = new MyString(strTwo);
                 if(!st->contains(pStrOne))
-                    st->put(pStrOne, st->size());
+                    st->put(pStrOne, new MyInt(st->size()));
                 if(!st->contains(pStrTwo))
-                    st->put(pStrTwo, st->size());
+                    st->put(pStrTwo, new MyInt(st->size()));
             }
             inputFile.close();
         }
 
         // Inverted index to get string keys is an array.
-        keys = new MyString[st->size()];
-
-        for(auto name : st->keys())
-            keys[st->get(name)] = name;
+        MyString ** inKeys;
+        inKeys = st->getKeys();
+        MyString * outKeys[st->size()];
+        keys = outKeys;
+        for(int i = 0; i < st->size(); i++)
+        {
+            MyInt * pInt = st->get(inKeys[i]);
+            outKeys[pInt->getInt()] = inKeys[i];
+        }
 
         G = new Graph(st->size());
 
         // second pass : builds the graph by connecting the first vertex on eachline
         // to all the others.
-        inputFile.open(stream, ifstream::read);
+        inputFile.open(stream, fstream::out | fstream::in);
         if(inputFile.is_open())
             cout << "open failed!" << endl;
         else
@@ -71,7 +77,9 @@ public:
                 int sperateIndex = strToSplit.find(sp);
                 string strOne = strToSplit.substr(0, sperateIndex);
                 string strTwo = strToSplit.substr(sperateIndex);
-                G->addEdge(st->get(strOne), st->get(strTwo));
+                MyString * pStrOne = new MyString(strOne);
+                MyString * pStrTwo = new MyString(strTwo);
+                G->addEdge(st->get(pStrOne)->getInt(), st->get(pStrTwo)->getInt());
             }
             inputFile.close();
         }
@@ -79,17 +87,19 @@ public:
 
     bool contains(string s)
     {
-        return st->contains(s);
+        MyString * pS = new MyString(s);
+        return st->contains(pS);
     }
 
     int index(string s)
     {
-        return st->get(s);
+        MyString * pS = new MyString(s);
+        return st->get(pS)->getInt();
     }
 
     string name(int v)
     {
-        return keys[v];
+        return keys[v]->getStr();
     }
 
     Graph * getG()

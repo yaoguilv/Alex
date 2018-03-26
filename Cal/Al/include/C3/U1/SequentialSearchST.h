@@ -62,5 +62,19 @@ public:
                 return true;
         return false;
     }
+
+    Key * getKeys()
+    {
+        int arrSize = size();
+        Key keyArr[arrSize];
+        Key * returnKey = keyArr;
+        int n = 0;
+        for(Node * x = first; x != nullptr; x = x->next)
+        {
+            keyArr[n] = x->key;
+            n++;
+        }
+        return returnKey;
+    }
 };
 #endif
