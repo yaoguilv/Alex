@@ -37,13 +37,30 @@ public:
         // Search for key, Update value if found; grow table if new.
         for(Node * x = first; x != nullptr; x = x->next)
             if(key->compareTo(x->key) == 0)
-            // Search hit: update val.
+                // Search hit: update val.
             {
                 x->val = val;
                 return;
             }
         // Search miss: add new node.
         first = new Node(key, val, first);
+    }
+
+    int size()
+    {
+        int arrSize = 0;
+        for(Node * x = first; x != nullptr; x = x->next)
+            arrSize++;
+        return arrSize;
+
+    }
+
+    bool contains(Key key)
+    {
+        for(Node * x = first; x != nullptr; x = x->next)
+            if(key->compareTo(x->key) == 0)
+                return true;
+        return false;
     }
 };
 #endif

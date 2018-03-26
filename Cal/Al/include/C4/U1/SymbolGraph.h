@@ -5,27 +5,29 @@
 #include <iostream>
 #include <string>
 #include "C4/U1/Graph.h"
+#include "C3/U1/SequentialSearchST.h"
+#include "C2/U1/MyString.h"
 
 using namespace std;
 
 class SymbolGraph {
 private:
     // String -> index
-    SequentialSearchST<string, int> * st;
+    SequentialSearchST<MyString *, int> * st;
     // index -> string
-    string* keys;
+    MyString * keys;
     // the graph
     Graph * G;
 
 public:
     SymbolGraph(string stream, string sp)
     {
-        st = new SequentialSearchST<string, int>();
+        st = new SequentialSearchST<MyString *, int>();
         // First pass:
         // builds the index by reading strings to associate each distinct string with an index.
         char buf[256];
         ifstream inputFile;
-        inputFile.open(stream, ifstream::read);
+        inputFile.open(stream, fstream::in | fstream::out);
         if(inputFile.is_open())
             cout << "open failed!" << endl;
         else
@@ -37,17 +39,20 @@ public:
                 int sperateIndex = strToSplit.find(sp);
                 string strOne = strToSplit.substr(0, sperateIndex);
                 string strTwo = strToSplit.substr(sperateIndex);
-                if(!st->contains(strOne))
-                    st->put(strOne, st->size());
-                if(!st->contains(strTwo))
-                    st->put(strTwo, st->size());
+                MyString * pStrOne = new MyString(strOne);
+                MyString * pStrTwo = new MyString(strTwo);
+                if(!st->contains(pStrOne))
+                    st->put(pStrOne, st->size());
+                if(!st->contains(pStrTwo))
+                    st->put(pStrTwo, st->size());
             }
             inputFile.close();
         }
 
         // Inverted index to get string keys is an array.
-        keys = new string[st->size];
-        for(auto name : st.keys())
+        keys = new MyString[st->size()];
+
+        for(auto name : st->keys())
             keys[st->get(name)] = name;
 
         G = new Graph(st->size());
@@ -87,7 +92,7 @@ public:
         return keys[v];
     }
 
-    Graph * G()
+    Graph * getG()
     {
         return G;
     }
