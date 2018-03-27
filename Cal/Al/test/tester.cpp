@@ -8,49 +8,21 @@ using namespace std;
 
 int main(int argc, char ** argv)
 {
-    Graph * myG = new Graph(4);
-    myG->addEdge(0, 1);
-    myG->addEdge(1, 2);
-    myG->addEdge(2, 3);
-    myG->addEdge(3, 0);
-
-    cout << "myG:" << endl;
-    string outContext = myG->toString();
-    cout << outContext;
-
-    cout << "myG is Bipartite:" << endl;
-    TwoColor * myTwoColor = new TwoColor(myG);
-    cout << myTwoColor->isBipartite() << endl;
-
-    cout << endl << endl;
-
-    Graph * myG2 = new Graph(4);
-    myG2->addEdge(0, 1);
-    myG2->addEdge(1, 2);
-    myG2->addEdge(2, 3);
-    myG2->addEdge(3, 1);
-
-    cout << "myG2:" << endl;
-    string outContext2 = myG2->toString();
-    cout << outContext2;
-
-    cout << "myG2 is Bipartite:" << endl;
-    TwoColor * myTwoColor2 = new TwoColor(myG2);
-    cout << myTwoColor2->isBipartite() << endl;
-
-    string fileName = argv[0];
-    string delim = argv[1];
+    string fileName = argv[1];
+    string delim = argv[2];
     SymbolGraph * sg = new SymbolGraph(fileName, delim);
 
-    Graph * G = sg->G();
+    Graph * myG = sg->getG();
 
     string inputStr;
     cin >> inputStr;
-    while(nullptr != inputStr)
+    while(!inputStr.empty())
     {
         string source = inputStr;
-        for(auto w : G->adj(sg->index(source)))
-            cout << "  " + sg->name(w);
+        int adjIndex = sg->index(source);
+
+        for(Bag<int>::Node * myIt = myG->adj[adjIndex]->first; myIt != nullptr; myIt = myIt->next)
+            cout << "  " + sg->name(myIt->item);
         cin >> inputStr;
     }
 }
