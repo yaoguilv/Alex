@@ -8,8 +8,8 @@ using namespace std;
 
 int main(int argc, char ** argv)
 {
-    string fileName = argv[1];
-    string delim = argv[2];
+    string fileName = "/home/cc/Downloads/.temp/Workspace/Alex/Cal/Al/bin/routes.txt";
+    string delim = " ";
     SymbolGraph * sg = new SymbolGraph(fileName, delim);
 
     Graph * myG = sg->getG();

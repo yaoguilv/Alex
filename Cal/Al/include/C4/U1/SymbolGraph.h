@@ -21,15 +21,15 @@ private:
     Graph * G;
 
 public:
-    SymbolGraph(string stream, string sp)
+    SymbolGraph(const string& fileName, const string& sp)
     {
         st = new SequentialSearchST<MyString *, MyInt *>();
         // First pass:
         // builds the index by reading strings to associate each distinct string with an index.
         char buf[256];
         ifstream inputFile;
-        inputFile.open(stream, fstream::in | fstream::out);
-        if(inputFile.is_open())
+        inputFile.open(fileName, fstream::in | fstream::out);
+        if(!inputFile.is_open())
             cout << "open failed!" << endl;
         else
         {
@@ -65,7 +65,7 @@ public:
 
         // second pass : builds the graph by connecting the first vertex on eachline
         // to all the others.
-        inputFile.open(stream, fstream::out | fstream::in);
+        inputFile.open(fileName, fstream::out | fstream::in);
         if(inputFile.is_open())
             cout << "open failed!" << endl;
         else

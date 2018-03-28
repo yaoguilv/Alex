@@ -8,7 +8,7 @@ using namespace std;
 int main(int argc, char ** argv)
 {
     // can not write as "~/Downloads/.temp/...."
-    string fileName= "routes.txt";
+    string fileName= "/home/cc/Downloads/.temp/Workspace/Alex/Cal/Al/bin/routes.txt";
     ifstream inputFile;
     inputFile.open(fileName.c_str(), ifstream::in);
     if(!inputFile.is_open())
