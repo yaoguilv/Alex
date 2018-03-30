@@ -72,6 +72,7 @@ public:
         for(Node * x = first; x != nullptr; x = x->next)
         {
             keyArr[n] = x->key;
+            cout << x->key << endl;
             n++;
         }
         return returnKey;

@@ -1,21 +1,35 @@
 #include <iostream>
-#include <string>
-#include <fstream>
 
 using namespace std;
 
 // execute command: bin/ticket dd
 int main(int argc, char ** argv)
 {
-    // can not write as "~/Downloads/.temp/...."
-    string fileName= "routes.txt";
-    ifstream inputFile;
-    inputFile.open(fileName.c_str(), ifstream::in);
-    if(!inputFile.is_open())
-        cout << "open failed!" << endl;
-    else
-        cout << "open success" << endl;
-    inputFile.close();
+    int ** arrA;
+    int arrB[3];
+    for(int i = 1; i < 4; i++)
+    {
+        arrB[i - 1] = i * 10;
+    }
+
+    int * arrC[3];
+    for(int i = 0; i < 3; i++)
+    {
+        arrC[i] = arrB + i;
+    }
+
+    cout << "int * arrC:" << endl;
+    for(int i = 0; i < 3; i++)
+    {
+        cout << arrC[i] << endl;
+    }
+
+    arrA = arrC;
+    cout << "int ** arrA:" << endl;
+    for(int i = 0; i < 3; i++)
+    {
+        cout << arrA[i] << endl;
+    }
 
     return 0;
 }

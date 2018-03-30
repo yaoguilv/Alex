@@ -15,7 +15,7 @@ int MyString::compareTo(Comparable * that)
     MyString * thatStr = dynamic_cast<MyString *>(that);
     if(this->str > thatStr->str)
         return +1;
-    else
+    else if(this->str < thatStr->str)
         return -1;
     return 0;
 }

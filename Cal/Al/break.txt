@@ -1,0 +1,4 @@
+Breakpoint 1 at 0x406905: file test/tester.cpp, line 10.
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000406905 in main(int, char**) at test/tester.cpp:10
+No breakpoints or watchpoints.

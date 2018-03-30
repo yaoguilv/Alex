@@ -38,14 +38,17 @@ public:
                 inputFile.getline(buf, 100);
                 string strToSplit = buf;
                 int sperateIndex = strToSplit.find(sp);
-                string strOne = strToSplit.substr(0, sperateIndex);
-                string strTwo = strToSplit.substr(sperateIndex);
-                MyString * pStrOne = new MyString(strOne);
-                MyString * pStrTwo = new MyString(strTwo);
-                if(!st->contains(pStrOne))
-                    st->put(pStrOne, new MyInt(st->size()));
-                if(!st->contains(pStrTwo))
-                    st->put(pStrTwo, new MyInt(st->size()));
+                if(string::npos != sperateIndex)
+                {
+                    string strOne = strToSplit.substr(0, sperateIndex);
+                    string strTwo = strToSplit.substr(sperateIndex + 1);
+                    MyString * pStrOne = new MyString(strOne);
+                    MyString * pStrTwo = new MyString(strTwo);
+                    if(!st->contains(pStrOne))
+                        st->put(pStrOne, new MyInt(st->size()));
+                    if(!st->contains(pStrTwo))
+                        st->put(pStrTwo, new MyInt(st->size()));
+                }
             }
             inputFile.close();
         }
@@ -57,8 +60,11 @@ public:
         keys = outKeys;
         for(int i = 0; i < st->size(); i++)
         {
-            MyInt * pInt = st->get(inKeys[i]);
-            outKeys[pInt->getInt()] = inKeys[i];
+            MyString * pStr = inKeys[i];
+            cout << pStr << endl;
+            cout << pStr->getStr() << endl;
+            MyInt * pInt = st->get(pStr);
+            outKeys[pInt->getInt()] = pStr;
         }
 
         G = new Graph(st->size());
@@ -75,11 +81,14 @@ public:
                 inputFile.getline(buf, 100);
                 string strToSplit = buf;
                 int sperateIndex = strToSplit.find(sp);
-                string strOne = strToSplit.substr(0, sperateIndex);
-                string strTwo = strToSplit.substr(sperateIndex);
-                MyString * pStrOne = new MyString(strOne);
-                MyString * pStrTwo = new MyString(strTwo);
-                G->addEdge(st->get(pStrOne)->getInt(), st->get(pStrTwo)->getInt());
+                if(string::npos != sperateIndex)
+                {
+                    string strOne = strToSplit.substr(0, sperateIndex);
+                    string strTwo = strToSplit.substr(sperateIndex + 1);
+                    MyString * pStrOne = new MyString(strOne);
+                    MyString * pStrTwo = new MyString(strTwo);
+                    G->addEdge(st->get(pStrOne)->getInt(), st->get(pStrTwo)->getInt());
+                }
             }
             inputFile.close();
         }
