@@ -1,5 +1,10 @@
 #ifndef SEQUENTIALSEARCHST_H
 #define SEQUENTIALSEARCHST_H
+#include <iostream>
+#include <vector>
+#include <iterator>
+
+using namespace std;
 
 template <class Key, class Value>
 class SequentialSearchST {
@@ -63,19 +68,15 @@ public:
         return false;
     }
 
-    Key * getKeys()
+    void getKeys(vector<Key>& keyArr)
     {
         int arrSize = size();
-        Key keyArr[arrSize];
-        Key * returnKey = keyArr;
         int n = 0;
         for(Node * x = first; x != nullptr; x = x->next)
         {
-            keyArr[n] = x->key;
-            cout << x->key << endl;
+            keyArr.push_back(x->key);
             n++;
         }
-        return returnKey;
     }
 };
 #endif

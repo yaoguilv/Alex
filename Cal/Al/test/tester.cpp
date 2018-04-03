@@ -22,7 +22,7 @@ int main(int argc, char ** argv)
         int adjIndex = sg->index(source);
 
         for(Bag<int>::Node * myIt = myG->adj[adjIndex]->first; myIt != nullptr; myIt = myIt->next)
-            cout << "  " + sg->name(myIt->item);
+            cout << "  " + sg->name(myIt->item) << endl;
         cin >> inputStr;
     }
 }

@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
+#include <vector>
+#include <iterator>
 #include "C4/U1/Graph.h"
 #include "C3/U1/SequentialSearchST.h"
 #include "C2/U1/MyString.h"
@@ -54,8 +56,8 @@ public:
         }
 
         // Inverted index to get string keys is an array.
-        MyString ** inKeys;
-        inKeys = st->getKeys();
+        vector<MyString*> inKeys;
+        st->getKeys(inKeys);
         MyString * outKeys[st->size()];
         keys = outKeys;
         for(int i = 0; i < st->size(); i++)
@@ -72,7 +74,7 @@ public:
         // second pass : builds the graph by connecting the first vertex on eachline
         // to all the others.
         inputFile.open(fileName, fstream::out | fstream::in);
-        if(inputFile.is_open())
+        if(!inputFile.is_open())
             cout << "open failed!" << endl;
         else
         {
