@@ -1,16 +1,48 @@
 package C4.U2;
+
+import C4.U1.Graph;
+import C3.U1.SequentialSearchST;
+import StdLib.In;
+import C1.Unit3_Stacks.Bag;
+
 public class Digraph {
     private final int V;
     private int E;
     private Bag<Integer>[] adj;
 
+    // build Digraph using file, elements in file separate with " "(space character)
+    public Digraph(String stream)
+    {
+        String sp = " ";
+        Integer[] myArr;
+
+        In in = new In(stream);
+        while(in.hasNextLine())
+        {
+            String[] a = in.readLine().split(sp);
+            for(int i = 0; i < a.length; i++)
+                if(!myArr.contains(Integer.parseInt(a[i])))
+                    myArr.add(Integer.parseInt(a[i]));
+        }
+
+        Digraph(myArr.length());
+        // Second pass : builds the graph by connecting the firsrt vertex on eachline
+        // to all the others.
+        in = new In(stream);
+        while(in.hasNextLine())
+        {
+            String[] a = in.readLine().split(sp);
+            addEdge(Integer.parseInt(a[0]), Integer.parseInt(a[1]));
+        }
+    }
+
     public Digraph(int v)
     {
-        this.V = V;
+        this.V = v;
         this.E = 0;
-        adj = (Bag<Integer>[]) new Bag[V];
-        for(int v = 0; v < V; v++)
-            adj[v] = new Bag<Integer>();
+        adj = (Bag<Integer>[]) new Bag<Integer>[V];
+        for(int i = 0; i < V; i++)
+            adj[i] = new Bag<Integer>();
     }
 
     public int V()
