@@ -11,5 +11,5 @@ else
 fi
 
 # -launch
-jdb -classpath $classpath -sourcepath $sourcepath test.Tester routes.txt " "
+jdb -classpath $classpath -sourcepath $sourcepath test.Tester data/tinyDG.txt 1
 

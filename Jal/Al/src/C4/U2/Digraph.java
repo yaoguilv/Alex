@@ -1,5 +1,6 @@
 package C4.U2;
 
+import java.util.ArrayList;
 import C4.U1.Graph;
 import C3.U1.SequentialSearchST;
 import StdLib.In;
@@ -11,10 +12,11 @@ public class Digraph {
     private Bag<Integer>[] adj;
 
     // build Digraph using file, elements in file separate with " "(space character)
+    @SuppressWarnings("unchecked")
     public Digraph(String stream)
     {
         String sp = " ";
-        Integer[] myArr;
+        ArrayList<Integer> myArr = new ArrayList<Integer>();
 
         In in = new In(stream);
         while(in.hasNextLine())
@@ -25,7 +27,11 @@ public class Digraph {
                     myArr.add(Integer.parseInt(a[i]));
         }
 
-        Digraph(myArr.length());
+        this.V = myArr.size();
+        this.E = 0;
+        adj = (Bag<Integer>[]) new Bag<?>[V];
+        for(int i = 0; i < V; i++)
+            adj[i] = new Bag<Integer>();
         // Second pass : builds the graph by connecting the firsrt vertex on eachline
         // to all the others.
         in = new In(stream);
@@ -36,11 +42,12 @@ public class Digraph {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public Digraph(int v)
     {
         this.V = v;
         this.E = 0;
-        adj = (Bag<Integer>[]) new Bag<Integer>[V];
+        adj = (Bag<Integer>[]) new Bag<?>[V];
         for(int i = 0; i < V; i++)
             adj[i] = new Bag<Integer>();
     }
