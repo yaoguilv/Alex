@@ -24,7 +24,7 @@ class Digraph {
             vector<int> * myArr = new vector<int>();
             ifstream inputFile;
             inputFile.open(fileName, fstream::in | fstream::out);
-            if(inputFile.is_open())
+            if(!inputFile.is_open())
                 cout << "open file failed!" << endl;
             else
             {
@@ -54,7 +54,7 @@ class Digraph {
             for(int i = 0; i < this->V; i++)
                 adj[i] = new Bag<int>();
             inputFile.open(fileName, fstream::in | fstream::out);
-            if(inputFile.is_open())
+            if(!inputFile.is_open())
                 cout << "open file failed!" << endl;
             else
             {

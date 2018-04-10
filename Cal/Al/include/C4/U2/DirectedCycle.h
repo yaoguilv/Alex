@@ -1,0 +1,78 @@
+#ifndef DIRECTEDCYCLE_H
+#define DIRECTEDCYCLE_H
+
+#include "C1/Unit3_Stacks/Stack.h"
+#include "C4/U2/Digraph.h"
+
+class DirectedCycle {
+    private:
+        vector<bool> marked;
+        vector<int> edgeTo;
+        // vertices on a cycle (if one exits)
+        Stack<int> cycle;
+        // vertices on recursive call stack
+        vector<bool> onStack;
+
+        void dfs(Digraph * G, int v)
+        {
+            onStack[v] = true;
+            marked[v] = true;
+            Bag<int>::Node * p = G->adj[v]->first;
+            while(nullptr != p)
+            {
+                int w = p->item;
+                if(this->hasCycle())
+                    return;
+                else if(!marked[w])
+                {
+                    edgeTo[w] = v;
+                    dfs(G, w);
+                }
+                else if(onStack[w])
+                {
+                    cycle = new Stack<int>();
+                    for(int x = v; x != w; x = edgeTo[x])
+                        cycle.push(x);
+                    cycle.push(w);
+                    cycle.push(v);
+                }
+                p = p->next;
+            }
+            onStack[v] = false;
+        }
+    public:
+        DirectedCycle(Digraph * G)
+        {
+            cycle = new Stack<int>();
+            int size = G->getV();
+            marked.reserve(size);
+            onStack.reserve(size);
+            for(int i = 0; i < size; i++)
+            {
+                marked[i] = false;
+                onStack[i] = false;
+            }
+
+            edgeTo.reserve(size);
+            for(int i = 0; i < size; i++)
+            {
+                edgeTo[i] = o;
+            }
+
+            for(int i = 0; i < size; i++)
+                if(!marked[i])
+                    dfs(G, i);
+        }
+
+        bool hasCycle()
+        {
+            return null != cycle;
+        }
+
+        void getCycle(Stack<int> myStack)
+        {
+            myStack = cycle;
+        }
+
+};
+#endif

@@ -10,10 +10,12 @@ using namespace std;
 
 int main(int argc, char ** argv)
 {
-    string fileName = "/home/cc/Downloads/.temp/Workspace/Alex/Cal/Al/bin/routes.txt";
+    string fileName = "/home/cc/Downloads/.temp/Workspace/Alex/Cal/Al/data/tinyDG.txt";
     Digraph *G = new Digraph(fileName);
-    vector<int> * sources = new vector<int>();
-    sources->push_back(1);
+    vector<int> sources;
+    sources.push_back(1);
+    sources.push_back(2);
+    sources.push_back(6);
 
     DirectedDFS * reachable = new DirectedDFS(G, sources);
 
@@ -22,3 +24,4 @@ int main(int argc, char ** argv)
             cout << i << " ";
     cout << endl;
 }
+#include "C4/U2/DirectedCycle.h"

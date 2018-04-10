@@ -18,6 +18,7 @@ private:
         {
             if(!marked->at(p->item))
                 dfs(G, p->item);
+            p = p->next;
         }
 
     }
@@ -26,6 +27,8 @@ public:
     {
         marked = new vector<bool>();
         marked->reserve(G->getV());
+        for(int i = 0; i < G->getV(); i++)
+            marked->push_back(0);
         dfs(G, s);
     }
 
@@ -33,6 +36,8 @@ public:
     {
         marked = new vector<bool>();
         marked->reserve(G->getV());
+        for(int i = 0; i < G->getV(); i++)
+            marked->push_back(0);
         for(vector<int>::iterator it = sources.begin(); it != sources.end(); it++)
         {
             if(!marked->at(*it))
