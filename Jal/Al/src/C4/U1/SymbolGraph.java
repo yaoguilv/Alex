@@ -16,7 +16,8 @@ public class SymbolGraph {
     {
         st = new SequentialSearchST<String, Integer>();
         // First pass:
-        // builds the index by reading strings to associate each distinct string with an index.
+        // builds the index by reading strings to associate
+        // each distinct string with an index.
         In in = new In(stream);
         while(in.hasNextLine())
         {
@@ -31,7 +32,8 @@ public class SymbolGraph {
             keys[st.get(name)] = name;
 
         G = new Graph(st.size());
-        // Second pass : builds the graph by connecting the firsrt vertex on eachline
+        // Second pass : builds the graph by connecting the
+        // firsrt vertex on eachline
         // to all the others.
         in = new In(stream);
         while(in.hasNextLine())

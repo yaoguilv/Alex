@@ -52,4 +52,17 @@ public class DirectedCycle {
     {
         return cycle;
     }
+
+    public static void main(String[] args)
+    {
+        Digraph G = new Digraph(args[0]);
+        DirectedCycle myCycle = new DirectedCycle(G);
+        StdLib.StdOut.println(myCycle.hasCycle());
+        Stack<Integer> myStack = (Stack<Integer>)myCycle.cycle();
+        while(!myStack.isEmpty())
+        {
+            StdLib.StdOut.println(myStack.pop());
+        }
+    }
+
 }

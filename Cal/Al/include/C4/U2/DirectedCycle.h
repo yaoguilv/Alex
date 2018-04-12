@@ -9,7 +9,7 @@ class DirectedCycle {
         vector<bool> marked;
         vector<int> edgeTo;
         // vertices on a cycle (if one exits)
-        Stack<int> cycle;
+        Stack<int> * cycle;
         // vertices on recursive call stack
         vector<bool> onStack;
 
@@ -32,9 +32,9 @@ class DirectedCycle {
                 {
                     cycle = new Stack<int>();
                     for(int x = v; x != w; x = edgeTo[x])
-                        cycle.push(x);
-                    cycle.push(w);
-                    cycle.push(v);
+                        cycle->push(x);
+                    cycle->push(w);
+                    cycle->push(v);
                 }
                 p = p->next;
             }
@@ -43,7 +43,7 @@ class DirectedCycle {
     public:
         DirectedCycle(Digraph * G)
         {
-            cycle = new Stack<int>();
+            cycle = NULL;
             int size = G->getV();
             marked.reserve(size);
             onStack.reserve(size);
@@ -56,7 +56,7 @@ class DirectedCycle {
             edgeTo.reserve(size);
             for(int i = 0; i < size; i++)
             {
-                edgeTo[i] = o;
+                edgeTo[i] = 0;
             }
 
             for(int i = 0; i < size; i++)
@@ -66,12 +66,12 @@ class DirectedCycle {
 
         bool hasCycle()
         {
-            return null != cycle;
+            return NULL != cycle;
         }
 
-        void getCycle(Stack<int> myStack)
+        Stack<int> * getCycle()
         {
-            myStack = cycle;
+            return cycle;
         }
 
 };
