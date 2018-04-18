@@ -30,6 +30,7 @@ class DepthFirstOrder {
             }
             post->enqueue(v);
             reversePost->push(v);
+            /* cout << v << endl; */
         }
 
     public:

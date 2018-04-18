@@ -11,6 +11,7 @@
 #include "C3/U1/SequentialSearchST.h"
 #include "C2/U1/MyString.h"
 #include "C2/U1/MyInt.h"
+#include "util/CString.h"
 
 using namespace std;
 
@@ -40,17 +41,18 @@ public:
             {
                 inputFile.getline(buf, 100);
                 string strToSplit = buf;
-                int sperateIndex = strToSplit.find(sp);
-                if(string::npos != sperateIndex)
+                if(!strToSplit.empty())
                 {
-                    string strOne = strToSplit.substr(0, sperateIndex);
-                    string strTwo = strToSplit.substr(sperateIndex + 1);
-                    MyString * pStrOne = new MyString(strOne);
-                    MyString * pStrTwo = new MyString(strTwo);
-                    if(!st->contains(pStrOne))
-                        st->put(pStrOne, new MyInt(st->size()));
-                    if(!st->contains(pStrTwo))
-                        st->put(pStrTwo, new MyInt(st->size()));
+                    vector<string> strArr;
+                    CString::split(strToSplit, sp, strArr);
+                    for(vector<string>::iterator it = strArr.begin(); it != strArr.end(); it++)
+                    {
+                        MyString* pStr = new MyString(*it);
+                        if(!st->contains(pStr))
+                        {
+                            st->put(pStr, new MyInt(st->size()));
+                        }
+                    }
                 }
             }
             inputFile.close();
@@ -64,8 +66,6 @@ public:
         for(int i = 0; i < st->size(); i++)
         {
             MyString * pStr = inKeys[i];
-            cout << pStr << endl;
-            cout << pStr->getStr() << endl;
             MyInt * pInt = st->get(pStr);
             outKeys[pInt->getInt()] = pStr;
         }
@@ -83,14 +83,11 @@ public:
             {
                 inputFile.getline(buf, 100);
                 string strToSplit = buf;
-                int sperateIndex = strToSplit.find(sp);
-                if(string::npos != sperateIndex)
+                vector<string> strArr;
+                CString::split(strToSplit, sp, strArr);
+                for(int i = 1; i < strArr.size(); i++)
                 {
-                    string strOne = strToSplit.substr(0, sperateIndex);
-                    string strTwo = strToSplit.substr(sperateIndex + 1);
-                    MyString * pStrOne = new MyString(strOne);
-                    MyString * pStrTwo = new MyString(strTwo);
-                    G->addEdge(st->get(pStrOne)->getInt(), st->get(pStrTwo)->getInt());
+                    G->addEdge(st->get(new MyString(strArr[0]))->getInt(), st->get(new MyString(strArr[i]))->getInt());
                 }
             }
             inputFile.close();

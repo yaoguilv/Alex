@@ -1,22 +1,28 @@
 package test;
 
 import C4.U2.Digraph;
-import C1.Unit3_Stacks.Stack;
-import C4.U2.DirectedCycle;
-import C4.U2.DepthFirstOrder;
-import C4.U2.Topological;
-import C4.U2.SymbolDigraph;
+import C4.U2.KosarajuSCC;
 
 public class Tester {
     public static void main(String[] args)
     {
         String filename = args[0];
-        String separator = args[1];
-        SymbolDigraph sg = new SymbolDigraph(filename, separator);
+        Digraph dg = new Digraph(filename);
 
-        Topological top = new Topological(sg.G());
+        KosarajuSCC ks = new KosarajuSCC(dg);
 
-        for(int v : top.order())
-            StdLib.StdOut.println(sg.name(v));
+        StdLib.StdOut.println(ks.count());
+        for(int i = 0; i < ks.count(); i++)
+        {
+            for(int j = 0; j < dg.V(); j++)
+            {
+                if(ks.id(j) == i)
+                {
+                    StdLib.StdOut.print(j);
+                    StdLib.StdOut.print("  ");
+                }
+            }
+            StdLib.StdOut.println();
+        }
     }
 }

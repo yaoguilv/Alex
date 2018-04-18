@@ -1,24 +1,26 @@
 #include <iostream>
 #include <string>
-#include "C1/Unit3_Stacks/Queue.h"
-#include "C1/Unit3_Stacks/Stack.h"
-#include "C4/U2/SymbolDigraph.h"
-#include "C4/U2/Topological.h"
+#include "C4/U2/Digraph.h"
+#include "C4/U2/KosarajuSCC.h"
 
 using namespace std;
 
 int main(int argc, char ** argv)
 {
-    string fileName = "/home/cc/Downloads/.temp/Workspace/Alex/Cal/Al/data/jobs.txt";
-    string delim = "/";
-    SymbolDigraph * sd = new SymbolDigraph(fileName, delim);
+    string fileName = "/usr/lib/.workspace/Alex/Cal/Al/data/tinyDG.txt";
+    Digraph* dg = new Digraph(fileName);
 
-    Topological * top = new Topological(sd->getG());
+    KosarajuSCC* ks = new KosarajuSCC(dg);
 
-    Stack<int> * order = top->getOrder();
-    while(order->isEmpty())
+    cout << ks->count() << endl;
+
+    for(int i = 0; i < ks->count(); i++)
     {
-        cout << sd->name(order->pop()) << endl;
+        for(int j = 0; j < dg->getV(); j++)
+        {
+            if(ks->id(j) == i)
+                cout << j << "  ";
+        }
+        cout << endl;
     }
 }
-
