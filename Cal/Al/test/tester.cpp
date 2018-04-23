@@ -12,15 +12,16 @@ int main(int argc, char ** argv)
 
     KosarajuSCC* ks = new KosarajuSCC(dg);
 
-    cout << ks->count() << endl;
+    cout << ks->getCount() << endl;
 
-    for(int i = 0; i < ks->count(); i++)
+    for(int i = 0; i < ks->getCount(); i++)
     {
         for(int j = 0; j < dg->getV(); j++)
         {
-            if(ks->id(j) == i)
+            if(ks->getId(j) == i)
                 cout << j << "  ";
         }
         cout << endl;
     }
 }
+#include "C4/U3/Edge.h"

@@ -39,10 +39,10 @@ public:
             marked.push_back(false);
         }
         DepthFirstOrder* order = new DepthFirstOrder(G->reverse());
-        Stack<int> reversePost = order->getReversePost();
-        while(!reversePost.isEmpty())
+        Stack<int>* reversePost = order->getReversePost();
+        while(!reversePost->isEmpty())
         {
-            int s = reversePost.pop();
+            int s = reversePost->pop();
             if(!marked[s])
             {
                 dfs(G, s);
@@ -56,12 +56,12 @@ public:
         return id[v] == id[w];
     }
 
-    int id(int v)
+    int getId(int v)
     {
         return id[v];
     }
 
-    int count()
+    int getCount()
     {
         return count;
     }
