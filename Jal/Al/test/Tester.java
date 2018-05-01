@@ -1,7 +1,5 @@
 package test;
 
-import C4.U2.Digraph;
-import C4.U2.KosarajuSCC;
 import C4.U3.Edge;
 import C4.U3.EdgeWeightedGraph;
 import C4.U3.LazyPrimMST;

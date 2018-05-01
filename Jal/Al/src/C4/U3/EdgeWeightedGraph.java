@@ -11,6 +11,7 @@ public class EdgeWeightedGraph {
     // adjacency lists
     private Bag<Edge>[] adj;
 
+    @SuppressWarnings (value="unchecked")
     public EdgeWeightedGraph(int V)
     {
         this.V = V;
@@ -67,15 +68,6 @@ public class EdgeWeightedGraph {
             {
                 if(e.other(v) > v)
                     list.add(e);
-                else if(e.other(v) == v)
-                {
-                    if(selfLoops % 2 == v)
-                    {
-                        if(selfLoops % 2 == 0)
-                            list.add(e);
-                        selfLoops++;
-                    }
-                }
             }
         }
         return list;

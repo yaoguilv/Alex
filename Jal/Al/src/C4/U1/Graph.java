@@ -65,6 +65,7 @@ public class Graph {
         return adj[v];
     }
 
+    @SuppressWarnings (value="unused")
     public static int degree(Graph G, int v)
     {
         int degree = 0;

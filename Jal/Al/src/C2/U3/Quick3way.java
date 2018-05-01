@@ -1,7 +1,6 @@
 package C2.U3;
 
 import C2.U1.Date;
-import java.util.*;
 
 public class Quick3way {
     public static <T extends Comparable<T>> void sort(T[] a)

@@ -1,6 +1,8 @@
 package C2.U4;
 
 import StdLib.*;
+import C4.U3.Edge;
+
 /*************************************************************************
  *
  *  Compilation:  javac MinPQ.java

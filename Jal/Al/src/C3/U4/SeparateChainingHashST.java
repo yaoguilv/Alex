@@ -1,11 +1,10 @@
 package C3.U4;
 
-import java.util.*;
 import C3.U1.SequentialSearchST;
 
 public class SeparateChainingHashST<Key extends Comparable<Key>, Value> {
     // number of key-value pairs
-    private int N;
+    // private int N;
     // hash table size
     private int M;
     // array of ST objects
@@ -31,7 +30,6 @@ public class SeparateChainingHashST<Key extends Comparable<Key>, Value> {
         return (key.hashCode() & 0x7fffffff) % M;
     }
 
-    @SuppressWarnings("cast")
     public Value get(Key key)
     {
         return (Value)st[hash(key)].get(key);

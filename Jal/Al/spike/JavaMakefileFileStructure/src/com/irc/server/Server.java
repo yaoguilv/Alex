@@ -1,4 +1,4 @@
-package com.irc.server;
+package spike.JavaMakefileFileStructure.src.com.irc.server;
 
 public class Server {
 	public String getServer() {

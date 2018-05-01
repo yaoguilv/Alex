@@ -8,11 +8,11 @@ public class Stack<Item> implements Iterable<Item>
     private Node<Item> first; // top of stack (most recently addeed node)
     private int N;
 
-    private class Node<Item>
+    private class Node<T>
     {
         // nested class to define nodes
-        Item item;
-        Node<Item> next;
+        T item;
+        Node<T> next;
     }
 
     public boolean isEmpty() { return first == null; } // Or : N == 0.
@@ -42,6 +42,7 @@ public class Stack<Item> implements Iterable<Item>
     }
 
     // an iterator, doesn't implement remove() since it's optional
+    @SuppressWarnings (value="hiding")
     private class ListIterator<Item> implements Iterator<Item> {
         private Node<Item> current;
 

@@ -1,13 +1,9 @@
 package spike;
 
-import java.util.*;
-
 class B
 {
     public int n;
-}
 
-public class Ticket {
     public static void main(String[] args)
     {
         B[] myB = new B[3];
@@ -23,4 +19,5 @@ public class Ticket {
             System.out.println(myB[i].n);
         }
     }
+
 }

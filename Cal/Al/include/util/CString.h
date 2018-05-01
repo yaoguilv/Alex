@@ -1,5 +1,5 @@
-#ifndef CDOUBLE_H
-#define CDOUBLE_H
+#ifndef CSTRING_H
+#define CSTRING_H
 #include "Comparable.h"
 #include <string>
 #include <vector>

@@ -5,6 +5,7 @@ import C1.Unit3_Stacks.Queue;
 import C4.U3.EdgeWeightedGraph;
 
 public class LazyPrimMST {
+    private double weight;
     // MST vertices
     private boolean[] marked;
     // MST edges
@@ -29,6 +30,7 @@ public class LazyPrimMST {
             if(marked[v] && marked[w]) continue;
             // Add edge to tree.
             mst.enqueue(e);
+            weight += e.weight();
             // Add vertex to tree(either v or w).
             if(!marked[v])
                 visit(G, v);
@@ -53,6 +55,6 @@ public class LazyPrimMST {
 
     public double weight()
     {
-        return 0.0;
+        return weight;
     }
 }

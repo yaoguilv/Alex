@@ -1,7 +1,5 @@
 package C4.U3;
 
-import C2.U4.IndexMinPQ;
-
 public class PrimMST {
     // // shortest edge from tree vertex
     // private Edge[] edgeTo;

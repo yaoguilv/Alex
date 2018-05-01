@@ -1,8 +1,6 @@
 package C4.U2;
 
 import java.util.ArrayList;
-import C4.U1.Graph;
-import C3.U1.SequentialSearchST;
 import StdLib.In;
 import C1.Unit3_Stacks.Bag;
 

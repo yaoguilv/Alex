@@ -2,10 +2,11 @@
 #define EDGE_H
 
 #include <string>
+#include "util/Comparable.h"
 
 using namespace std;
 
-class Edge {
+class Edge : public Comparable{
 private:
     // one vertex
     int v;
@@ -37,23 +38,25 @@ public:
             return w;
         else if(vertex == w)
             return v;
-        else
-            throw new RuntimeException("Inconsistent edge");
     }
 
-    int compareTo(Edge * that)
+    int compareTo(Comparable * that)
     {
-        if(this->weight() < that->weight())
+        Edge * thatEdge = dynamic_cast<Edge*>(that);
+        if(this->getWeight() < thatEdge->getWeight())
             return -1;
-        else if(this->weight() > that->weight())
+        else if(this->getWeight() > thatEdge->getWeight())
             return +1;
         else
             return 0;
     }
 
-    public string toString()
+    string toString()
     {
-        return string.format("%d-%d %.2f", v, w, weight);
+        string strV = to_string(v);
+        string strW = to_string(w);
+        string strWeight = to_string(weight);
+        return strV + "-" + strW + " " + strWeight;
     }
 };
 #endif

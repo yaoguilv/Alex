@@ -1,9 +1,5 @@
 package C4.U2;
 
-import java.util.*;
-import C4.U1.Graph;
-import C4.U1.SymbolGraph;
-import C4.U1.DegreesOfSeparation;
 import C4.U2.Digraph;
 import C1.Unit3_Stacks.Bag;
 import C4.U2.DirectedDFS;

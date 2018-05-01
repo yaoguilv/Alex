@@ -3,7 +3,6 @@ package C4.U2;
 import C4.U2.Digraph;
 import C4.U2.DirectedCycle;
 import C4.U2.DepthFirstOrder;
-import C1.Unit3_Stacks.Stack;
 import C4.U2.Topological;
 import C4.U2.SymbolDigraph;
 

@@ -1,11 +1,9 @@
 package spike;
 
-import java.util.*;
-
-class A<T>
+class GenA<T>
 {
     public T m;
-    public A(T a)
+    public GenA(T a)
     {
         m = a;
     }
@@ -14,12 +12,11 @@ class A<T>
     {
         return m;
     }
-}
 
-public class Ticket {
     public static void main(String[] args)
     {
-        A<Integer> myA = new A<Integer>(2);
-        System.out.println(myA.getM());
+        GenA<Integer> myGenA = new GenA<Integer>(2);
+        System.out.println(myGenA.getM());
     }
+
 }

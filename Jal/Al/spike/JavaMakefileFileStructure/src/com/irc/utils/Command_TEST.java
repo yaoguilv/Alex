@@ -1,4 +1,4 @@
-package com.irc.utils;
+package spike.JavaMakefileFileStructure.src.com.irc.utils;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
@@ -12,7 +12,7 @@ public class Command_TEST {
 		System.out.println(command.getCommand());
 		BasicConfigurator.configure();
 		LOGGER.info("yes yes yes log4j print");
-	
+
 	}
 }
 

@@ -1,7 +1,6 @@
 package C2.U4;
 
 import C2.U1.Date;
-import java.util.*;
 
 public class Heapsort {
     // just can sort the [1..N] numbers, no 0 number

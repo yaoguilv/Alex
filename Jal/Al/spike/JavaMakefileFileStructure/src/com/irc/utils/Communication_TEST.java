@@ -1,4 +1,4 @@
-package com.irc.utils;
+package spike.JavaMakefileFileStructure.src.com.irc.utils;
 
 public class Communication_TEST {
 	public static void main(String[] args) {

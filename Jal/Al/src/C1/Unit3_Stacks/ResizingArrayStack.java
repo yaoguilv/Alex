@@ -2,6 +2,7 @@ package C1.Unit3_Stacks;
 
 import java.util.Iterator;
 
+@SuppressWarnings (value="unchecked")
 public class ResizingArrayStack<Item> implements Iterable<Item>
 {
     private Item[] a = (Item[]) new Object[1];

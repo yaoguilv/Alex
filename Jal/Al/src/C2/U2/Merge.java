@@ -1,7 +1,6 @@
 package C2.U2;
 
 import C2.U1.Date;
-import java.util.*;
 
 public class Merge {
     // auxiliary array for merges
@@ -48,6 +47,7 @@ public class Merge {
         }
     }
 
+    @SuppressWarnings (value="unused")
     private static <T extends Comparable<T>> void exch(T[] a, int i, int j)
     {
         T t = a[i];

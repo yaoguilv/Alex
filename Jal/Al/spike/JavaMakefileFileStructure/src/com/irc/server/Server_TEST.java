@@ -1,4 +1,4 @@
-package com.irc.server;
+package spike.JavaMakefileFileStructure.src.com.irc.server;
 
 public class Server_TEST {
 	public static void main(String[] agrs) {

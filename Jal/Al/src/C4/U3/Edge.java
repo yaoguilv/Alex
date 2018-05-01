@@ -1,6 +1,6 @@
 package C4.U3;
 
-public class Edge {
+public class Edge implements Comparable<Edge> {
     // one vertex
     private final int v;
     // the other vertex

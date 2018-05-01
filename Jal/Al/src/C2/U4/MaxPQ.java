@@ -1,8 +1,6 @@
 package C2.U4;
 
 import C2.U1.Date;
-import java.util.*;
-
 
 public class MaxPQ<Key extends Comparable<Key>> {
     // heap-ordered complete binary tree.
@@ -80,8 +78,6 @@ public class MaxPQ<Key extends Comparable<Key>> {
 
     public static void main(String[] args)
     {
-        Date[] dat = new Date[]{new Date(1, 1, 2010),
-        new Date(1, 1, 2017), new Date(1, 1, 2015)};
         MaxPQ<Date> myMaxPQ = new MaxPQ<Date>(3);
         System.out.println("isEmpty: ");
         System.out.println(myMaxPQ.isEmpty());
