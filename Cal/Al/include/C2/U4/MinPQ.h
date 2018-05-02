@@ -10,7 +10,7 @@ class MinPQ {
         // in pq[1..N] with pq[0] unused
         int N = 0;
 
-        bool less(int i, int j);
+        bool greater(int i, int j);
         void exch(int i, int j);
         void swim(int k);
         void sink(int k);

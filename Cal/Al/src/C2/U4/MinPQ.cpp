@@ -33,9 +33,9 @@ Comparable* MinPQ::delMin()
     return min;
 }
 
-bool MinPQ::less(int i, int j)
+bool MinPQ::greater(int i, int j)
 {
-    return pqmin[i]->compareTo(pqmin[j]) < 0;
+    return pqmin[i]->compareTo(pqmin[j]) > 0;
 }
 
 void MinPQ::exch(int i, int j)
@@ -47,7 +47,7 @@ void MinPQ::exch(int i, int j)
 
 void MinPQ::swim(int k)
 {
-    while(k > 1 && less(k/2, k))
+    while(k > 1 && greater(k/2, k))
     {
         exch(k/2, k);
         k = k/2;
@@ -59,8 +59,8 @@ void MinPQ::sink(int k)
     while(2 * k <= N)
     {
         int j = 2 * k;
-        if(j < N && less(j, j + 1)) j++;
-        if(!less(k, j)) break;
+        if(j < N && greater(j, j + 1)) j++;
+        if(!greater(k, j)) break;
         k = j;
     }
 }
