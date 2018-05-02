@@ -10,71 +10,71 @@
 using namespace std;
 
 class LazyPrimMST {
-private:
-    double weight;
-    // MST vertices
-    vector<bool> marked;
-    // MST edges
-    Queue<Edge*>* mst;
-    // crossing (and ineligible) edges
-    MinPQ<Edge*>* pq;
+/* private: */
+/*     double weight; */
+/*     // MST vertices */
+/*     vector<bool> marked; */
+/*     // MST edges */
+/*     Queue<Edge*>* mst; */
+/*     // crossing (and ineligible) edges */
+/*     MinPQ<Edge*>* pq; */
 
-    void visit(EdgeWeightedGraph * G, int v)
-    {
-        // Mark v and add to pq all edges from v to unmarked vertices.
-        marked[v] = true;
-        vector<Edge*> arrVEdges;
-        G->getAdj(v, arrVEdges);
-        for(vector<Edge*>::iterator it = arrVEdges.begin(); it != arrVEdges.end(); it++)
-        {
-            if(!marked[(*it)->other(v)])
-                pq->insert(*it);
-        }
-    }
+/*     void visit(EdgeWeightedGraph * G, int v) */
+/*     { */
+/*         // Mark v and add to pq all edges from v to unmarked vertices. */
+/*         marked[v] = true; */
+/*         vector<Edge*> arrVEdges; */
+/*         G->getAdj(v, arrVEdges); */
+/*         for(vector<Edge*>::iterator it = arrVEdges.begin(); it != arrVEdges.end(); it++) */
+/*         { */
+/*             if(!marked[(*it)->other(v)]) */
+/*                 pq->insert(*it); */
+/*         } */
+/*     } */
 
-public:
-    LazyPrimMST(EdgeWeightedGraph* G)
-    {
-        pq = new MinPQ<Edge*>();
-        marked.reserver(G->getV());
-        for(int i = 0; i < G->getV(); i++)
-        {
-            marked.push_back(false);
-        }
-        mst = new Queue<Edge*>();
+/* public: */
+/*     LazyPrimMST(EdgeWeightedGraph* G) */
+/*     { */
+/*         pq = new MinPQ<Edge*>(); */
+/*         marked.reserver(G->getV()); */
+/*         for(int i = 0; i < G->getV(); i++) */
+/*         { */
+/*             marked.push_back(false); */
+/*         } */
+/*         mst = new Queue<Edge*>(); */
 
-        // assumes G is connected
-        visit(G, 0);
-        while(!pq->isEmpty())
-        {
-            // Get lowest-weight edge from pq.
-            Edge* e = pq->delMin();
-            int v = e->either(), w = e->other(v);
-            // Skip if ineligible.
-            if(marked[v] && marked[w]) continue;
-            // Add edge to tree.
-            mst->enqueue(e);
-            weight += e->weight();
-            // Add vertex to tree(eighter v or w).
-            if(!marked[v])
-                visit(G, v);
-            if(!marked[w])
-                visit(G, w);
-        }
-    }
+/*         // assumes G is connected */
+/*         visit(G, 0); */
+/*         while(!pq->isEmpty()) */
+/*         { */
+/*             // Get lowest-weight edge from pq. */
+/*             Edge* e = pq->delMin(); */
+/*             int v = e->either(), w = e->other(v); */
+/*             // Skip if ineligible. */
+/*             if(marked[v] && marked[w]) continue; */
+/*             // Add edge to tree. */
+/*             mst->enqueue(e); */
+/*             weight += e->weight(); */
+/*             // Add vertex to tree(eighter v or w). */
+/*             if(!marked[v]) */
+/*                 visit(G, v); */
+/*             if(!marked[w]) */
+/*                 visit(G, w); */
+/*         } */
+/*     } */
 
-    void getEdges(Queue<Edge*>& edges)
-    {
-        while(!mst->isEmpty())
-        {
-            edges.enqueue(mst.dequeue());
-        }
-    }
+/*     void getEdges(Queue<Edge*>& edges) */
+/*     { */
+/*         while(!mst->isEmpty()) */
+/*         { */
+/*             edges.enqueue(mst.dequeue()); */
+/*         } */
+/*     } */
 
-    double getWeight()
-    {
-        return weight;
-    }
+/*     double getWeight() */
+/*     { */
+/*         return weight; */
+/*     } */
 };
 
 #endif

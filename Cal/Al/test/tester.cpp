@@ -1,28 +1,32 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "C4/U3/Edge.h"
-#include "C4/U3/EdgeWeightedGraph.h"
+#include "C2/U1/MyDate.h"
+#include "C2/U4/MinPQ.h"
 
 using namespace std;
 
 int main(int argc, char ** argv)
 {
+    cout << "Hello tester!" << endl;
 
-    string fileName = "/usr/lib/.workspace/Alex/Cal/Al/data/tinyEWG.txt";
-    EdgeWeightedGraph* myGraph = new EdgeWeightedGraph(fileName);
-    vector<Edge*> myVEdge;
-    vector<Edge*> myEdge;
-    myGraph->getAdj(2, myVEdge);
-    for(vector<Edge*>::iterator it = myVEdge.begin(); it != myVEdge.end(); it++)
-    {
-        cout << (*it)->toString() << endl;
-    }
-    cout << endl;
-    myGraph->getEdges(myEdge);
-    for(vector<Edge*>::iterator it = myEdge.begin(); it != myEdge.end(); it++)
-    {
-        cout << (*it)->toString() << endl;
-    }
+    MinPQ* myMinPQ = new MinPQ(3);
+    cout << "isEmpty: " << endl;
+    cout << myMinPQ->isEmpty() << endl;
+
+    myMinPQ->insert(new MyDate(1, 1, 2010));
+    cout << "now size: " << endl;
+    cout << myMinPQ->size() << endl;
+
+    myMinPQ->insert(new MyDate(1, 1, 2017));
+    myMinPQ->insert(new MyDate(1, 1, 2015));
+    cout << "now size: " << endl;
+    cout << myMinPQ->size() << endl;
+
+    MyDate* myDat = dynamic_cast<MyDate*>(myMinPQ->delMin());
+    cout << "delete Min: " << endl;
+    cout << myDat->toString() << endl;
+    cout << "now size: " << endl;
+    cout << myMinPQ->size() << endl;
+
 }
-#include "C4/U3/LazyPrimMST.h"
