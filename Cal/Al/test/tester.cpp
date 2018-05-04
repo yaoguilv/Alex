@@ -3,30 +3,26 @@
 #include <vector>
 #include "C2/U1/MyDate.h"
 #include "C2/U4/MinPQ.h"
+#include "C1/Unit3_Stacks/Queue.h"
+#include "C4/U3/EdgeWeightedGraph.h"
+#include "C4/U3/LazyPrimMST.h"
 
 using namespace std;
 
 int main(int argc, char ** argv)
 {
-    cout << "Hello tester!" << endl;
+    string fileName = "";
+    EdgeWeightedGraph* G;
+    G = new EdgeWeightedGraph(fileName);
 
-    MinPQ* myMinPQ = new MinPQ(3);
-    cout << "isEmpty: " << endl;
-    cout << myMinPQ->isEmpty() << endl;
+    LazyPrimMST* mst = new LazyPrimMST(G);
+    Queue<Edge*> edges;
+    mst->getEdges(edges);
+    while(!edges.isEmpty())
+    {
+        Edge* e = mst->dequeue();
+        cout << e->toString() << endl;
+    }
 
-    myMinPQ->insert(new MyDate(1, 1, 2010));
-    cout << "now size: " << endl;
-    cout << myMinPQ->size() << endl;
-
-    myMinPQ->insert(new MyDate(1, 1, 2017));
-    myMinPQ->insert(new MyDate(1, 1, 2015));
-    cout << "now size: " << endl;
-    cout << myMinPQ->size() << endl;
-
-    MyDate* myDat = dynamic_cast<MyDate*>(myMinPQ->delMin());
-    cout << "delete Min: " << endl;
-    cout << myDat->toString() << endl;
-    cout << "now size: " << endl;
-    cout << myMinPQ->size() << endl;
-
+    cout << mst->getWeight();
 }
