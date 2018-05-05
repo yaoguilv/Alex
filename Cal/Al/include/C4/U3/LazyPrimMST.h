@@ -12,13 +12,13 @@ using namespace std;
 
 class LazyPrimMST {
 private:
-    double weight;
+    double weight = 0.0;
     // MST vertices
     vector<bool> marked;
     // MST edges
     Queue<Edge*>* mst;
     // crossing (and ineligible) edges
-    MinPQ<Edge*>* pq;
+    MinPQ* pq;
 
     void visit(EdgeWeightedGraph * G, int v)
     {
@@ -36,8 +36,8 @@ private:
 public:
     LazyPrimMST(EdgeWeightedGraph* G)
     {
-        pq = new MinPQ<Edge*>();
-        marked.reserver(G->getV());
+        pq = new MinPQ();
+        marked.reserve(G->getV());
         for(int i = 0; i < G->getV(); i++)
         {
             marked.push_back(false);
@@ -55,7 +55,7 @@ public:
             if(marked[v] && marked[w]) continue;
             // Add edge to tree.
             mst->enqueue(e);
-            weight += e->weight();
+            weight += e->getWeight();
             // Add vertex to tree(eighter v or w).
             if(!marked[v])
                 visit(G, v);
@@ -68,7 +68,7 @@ public:
     {
         while(!mst->isEmpty())
         {
-            edges.enqueue(mst.dequeue());
+            edges.enqueue(mst->dequeue());
         }
     }
 
