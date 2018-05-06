@@ -18,7 +18,7 @@ private:
 
 public:
     Queue();
-    ~Queue();
+    ~Queue(){};
     bool isEmpty();
     int size();
     void enqueue(T item);

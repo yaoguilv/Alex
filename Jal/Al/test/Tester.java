@@ -2,7 +2,7 @@ package test;
 
 import C4.U3.Edge;
 import C4.U3.EdgeWeightedGraph;
-import C4.U3.LazyPrimMST;
+import C4.U3.PrimMST;
 
 public class Tester {
     public static void main(String[] args)
@@ -11,7 +11,7 @@ public class Tester {
         EdgeWeightedGraph G;
         G = new EdgeWeightedGraph(in);
 
-        LazyPrimMST mst = new LazyPrimMST(G);
+        PrimMST mst = new PrimMST(G);
         for(Edge e : mst.edges())
             StdLib.StdOut.println(e);
         StdLib.StdOut.println(mst.weight());

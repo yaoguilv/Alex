@@ -4,6 +4,8 @@ import C2.U4.MinPQ;
 import C1.Unit3_Stacks.Queue;
 import C4.U3.EdgeWeightedGraph;
 
+import C4.U3.Edge;
+
 public class LazyPrimMST {
     private double weight;
     // MST vertices
@@ -56,5 +58,17 @@ public class LazyPrimMST {
     public double weight()
     {
         return weight;
+    }
+
+    public static void main(String[] args)
+    {
+        StdLib.In in = new StdLib.In(args[0]);
+        EdgeWeightedGraph G;
+        G = new EdgeWeightedGraph(in);
+
+        LazyPrimMST mst = new LazyPrimMST(G);
+        for(Edge e : mst.edges())
+            StdLib.StdOut.println(e);
+        StdLib.StdOut.println(mst.weight());
     }
 }

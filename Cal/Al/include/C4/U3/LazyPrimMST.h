@@ -36,7 +36,7 @@ private:
 public:
     LazyPrimMST(EdgeWeightedGraph* G)
     {
-        pq = new MinPQ();
+        pq = new MinPQ(G->getE());
         marked.reserve(G->getV());
         for(int i = 0; i < G->getV(); i++)
         {
@@ -49,7 +49,7 @@ public:
         while(!pq->isEmpty())
         {
             // Get lowest-weight edge from pq.
-            Edge* e = pq->delMin();
+            Edge* e = dynamic_cast<Edge*>(pq->delMin());
             int v = e->either(), w = e->other(v);
             // Skip if ineligible.
             if(marked[v] && marked[w]) continue;

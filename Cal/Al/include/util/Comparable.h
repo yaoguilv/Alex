@@ -4,5 +4,6 @@ class Comparable
 {
 public:
     virtual int compareTo(Comparable * that) = 0;
+    virtual ~Comparable() {}
 };
 #endif

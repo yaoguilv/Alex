@@ -1,4 +1,7 @@
 #include "C2/U4/MinPQ.h"
+#include "C4/U3/Edge.h"
+
+using namespace std;
 
 Comparable ** pqmin;
 
@@ -22,6 +25,8 @@ void MinPQ::insert(Comparable* v)
 {
     pqmin[++N] = v;
     swim(N);
+    cout << "new element:";
+    Edge* myE1 = dynamic_cast<Edge*>(v);
 }
 
 Comparable* MinPQ::delMin()
@@ -61,6 +66,7 @@ void MinPQ::sink(int k)
         int j = 2 * k;
         if(j < N && greater(j, j + 1)) j++;
         if(!greater(k, j)) break;
+        exch(k, j);
         k = j;
     }
 }
