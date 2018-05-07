@@ -1,11 +1,6 @@
 #include <iostream>
-#include <string>
-#include <vector>
 #include "C2/U1/MyDate.h"
-#include "C2/U4/MinPQ.h"
-#include "C1/Unit3_Stacks/Queue.h"
-#include "C4/U3/EdgeWeightedGraph.h"
-#include "C4/U3/LazyPrimMST.h"
+#include "C2/U4/IndexMinPQ.h"
 
 using namespace std;
 
@@ -27,5 +22,4 @@ int main(int argc, char ** argv)
 
     cout << mst->getWeight() << endl;
 }
-#include "C4/U3/PrimMST.h"
-#include "C2/U4/IndexMinPQ.h"
+

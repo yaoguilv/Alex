@@ -25,7 +25,6 @@ void MinPQ::insert(Comparable* v)
 {
     pqmin[++N] = v;
     swim(N);
-    cout << "new element:";
     Edge* myE1 = dynamic_cast<Edge*>(v);
 }
 

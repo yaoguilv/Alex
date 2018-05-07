@@ -1,7 +1,12 @@
 #ifndef INDEXMINPQ_H
 #define INDEXMINPQ_H
 
+#include <vector>
+#include <iterator>
+
 #include "util/Comparable.h"
+
+using namespace std;
 
 class IndexMinPQ {
 private:
@@ -9,13 +14,22 @@ private:
     int N;
     // binary heap using 1-based indexing
     vector<int> pq;
+
+    vector<int> qp;
+
     vector<Comparable*> keys;
 
-    swim(int k);
+    void swim(int k);
 
-    sink(int k);
+    void sink(int k);
+
+    bool greater(int i, int j);
+
+    void exch(int i, int j);
 
 public:
+    IndexMinPQ(int NMax);
+
     bool isEmpty();
 
     bool contains(int k);
