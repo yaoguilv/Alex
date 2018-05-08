@@ -1,9 +1,12 @@
 #include "C2/U4/IndexMinPQ.h"
 
+#include <iostream>
+
 using namespace std;
 
 IndexMinPQ::IndexMinPQ(int NMax)
 {
+    N = 0;
     keys.reserve(NMax + 1);
     pq.reserve(NMax + 1);
     qp.reserve(NMax + 1);
@@ -37,6 +40,8 @@ void IndexMinPQ::insert(int k, Comparable* key)
     pq[N] = k;
     keys[k] = key;
     swim(N);
+    cout << "now min:" << endl;
+    cout << min() << endl;
 }
 
 int IndexMinPQ::min()

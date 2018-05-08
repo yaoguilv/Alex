@@ -1,4 +1,6 @@
 #include "C4/U3/PrimMST.h"
+#include "util/CDouble.h"
+
 #include <cmath>
 
 using namespace std;
@@ -20,7 +22,7 @@ PrimMST::PrimMST(EdgeWeightedGraph* G)
 
     distTo[0] = 0.0;
     // Initial pq with 0, weight 0.
-    pq->insert(0, 0.0);
+    pq->insert(0, new CDouble(0.0));
     visit(G, pq->delMin());
     while(!pq->isEmpty())
     {
@@ -50,9 +52,9 @@ void PrimMST::visit(EdgeWeightedGraph* G, int v)
             edgeTo[w] = *it;
             distTo[w] = (*it)->getWeight();
             if(pq->contains(w))
-                pq->change(w, distTo[w]);
+                pq->change(w, new CDouble(distTo[w]));
             else
-                pq->insert(w, distTo[w]);
+                pq->insert(w, new CDouble(distTo[w]));
         }
     }
 }
