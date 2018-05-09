@@ -1,6 +1,5 @@
 #include "C2/U4/IndexMinPQ.h"
 #include "util/CDouble.h"
-#include <iostream>
 
 
 using namespace std;
@@ -41,21 +40,21 @@ void IndexMinPQ::insert(int k, Comparable* key)
     pq[N] = k;
     keys[k] = key;
     swim(N);
-    for(vector<Comparable*>::iterator it = keys.begin(); it != keys.end(); it++)
-    {
-        if((*it )!= nullptr)
-        {
-            CDouble* myD = dynamic_cast<CDouble*>(*it);
-            cout << myD->getValue() << " ";
-        }
-        else
-        {
-            cout << "nullptr" << " ";
-        }
-    }
-    cout << endl;
-    cout << "now min:";
-    cout << min() << endl;
+    /* for(vector<Comparable*>::iterator it = keys.begin(); it != keys.end(); it++) */
+    /* { */
+    /*     if((*it )!= nullptr) */
+    /*     { */
+    /*         CDouble* myD = dynamic_cast<CDouble*>(*it); */
+    /*         cout << myD->getValue() << " "; */
+    /*     } */
+    /*     else */
+    /*     { */
+    /*         cout << "nullptr" << " "; */
+    /*     } */
+    /* } */
+    /* cout << endl; */
+    /* cout << "now min:"; */
+    /* cout << min() << endl; */
 }
 
 int IndexMinPQ::min()

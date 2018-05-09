@@ -1,7 +1,5 @@
 #include "C4/U3/PrimMST.h"
 #include "util/CDouble.h"
-
-#include <iostream>
 #include <cmath>
 
 using namespace std;
@@ -28,7 +26,6 @@ PrimMST::PrimMST(EdgeWeightedGraph* G)
     while(!pq->isEmpty())
     {
         int VertexMin = pq->min();
-        cout << "VertexMin:" << VertexMin << endl;
         mst.enqueue(edgeTo[VertexMin]);
         weight += edgeTo[VertexMin]->getWeight();
         // Add closed vertex to tree.
