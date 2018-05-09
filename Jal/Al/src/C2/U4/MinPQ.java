@@ -2,6 +2,7 @@ package C2.U4;
 
 import StdLib.*;
 
+
 /*************************************************************************
  *
  *  Compilation:  javac MinPQ.java
@@ -83,6 +84,25 @@ public class MinPQ<Key> implements Iterable<Key> {
         pq = (Key[]) new Object[keys.length + 1];
         for (int i = 0; i < N; i++)
             pq[i+1] = keys[i];
+        for (int k = N/2; k >= 1; k--)
+            sink(k);
+        assert isMinHeap();
+    }
+
+    public MinPQ(Iterable<Key> keys)
+    {
+        N = 0;
+        for(Key myKey : keys)
+        {
+            N++;
+        }
+        pq = (Key[]) new Object[N + 1];
+        int i = 1;
+        for(Key myKey : keys)
+        {
+            pq[i++] = myKey;
+        }
+
         for (int k = N/2; k >= 1; k--)
             sink(k);
         assert isMinHeap();

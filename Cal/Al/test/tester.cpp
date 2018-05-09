@@ -5,7 +5,7 @@
 #include "C2/U4/IndexMinPQ.h"
 #include "C1/Unit3_Stacks/Queue.h"
 #include "C4/U3/EdgeWeightedGraph.h"
-#include "C4/U3/PrimMST.h"
+#include "C4/U3/KruskalMST.h"
 
 using namespace std;
 
@@ -15,7 +15,7 @@ int main(int argc, char ** argv)
     EdgeWeightedGraph* G;
     G = new EdgeWeightedGraph(fileName);
 
-    PrimMST* mst = new PrimMST(G);
+    KruskalMST* mst = new KruskalMST(G);
     Queue<Edge*> edges;
     mst->getEdges(edges);
     cout << "outpu mst:" << endl;
