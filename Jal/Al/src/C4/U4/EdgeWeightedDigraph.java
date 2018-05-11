@@ -65,4 +65,28 @@ public class EdgeWeightedDigraph {
                 bag.add(e);
         return bag;
     }
+
+    public static void main(String[] args)
+    {
+        StdLib.In in = new StdLib.In(args[0]);
+        EdgeWeightedDigraph myEWD = new EdgeWeightedDigraph(in);
+
+        System.out.println(myEWD.V());
+        System.out.println(myEWD.E());
+
+        System.out.println("now vertex 5's following edges:");
+        Iterable<DirectedEdge> myAdj = myEWD.adj(5);
+        for(DirectedEdge myEdge : myAdj)
+        {
+            System.out.println(myEdge.toString());
+        }
+
+        System.out.println("now all Edges:");
+        Iterable<DirectedEdge> myAll = myEWD.edges();
+        for(DirectedEdge myEdge : myAll)
+        {
+            System.out.println(myEdge.toString());
+        }
+    }
+
 }

@@ -24,6 +24,12 @@ Bag<T>::Bag()
 }
 
 template<class T>
+Bag<T>::~Bag()
+{
+    first = nullptr;
+}
+
+template<class T>
 void Bag<T>::add(T item)
 {
     Node * oldfirst = first;
