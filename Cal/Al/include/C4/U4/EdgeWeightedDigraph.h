@@ -14,104 +14,105 @@
 using namespace std;
 
 class EdgeWeightedDigraph {
-    private:
-        // number of verteices
-        int V;
-        // number of edges
-        int E;
-        // adjacency lists
-        Bag<DirectedEdge*>** adj;
+private:
+    // number of verteices
+    int V;
+    // number of edges
+    int E;
+    // adjacency lists
+    Bag<DirectedEdge*>** adj;
 
-    public:
-        EdgeWeightedDigraph(int inV)
+public:
+    EdgeWeightedDigraph(int inV)
+    {
+        this->V = inV;
+        this->E = 0;
+        adj = new Bag<DirectedEdge*>*[V];
+        for(int v = 0; v < V; v++)
         {
-            this->V = inV;
-            this->E = 0;
-            adj = new Bag<DirectedEdge*>*[V];
-            for(int v = 0; v < V; v++)
-            {
-                adj[v] = new Bag<DirectedEdge*>();
-            }
+            cout << v << ":" << adj[v] << endl;
+        }
+    }
+
+    EdgeWeightedDigraph(const string fileName)
+    {
+        ifstream inputFile;
+        inputFile.open(fileName, fstream::in | fstream::out);
+        vector<string> strArr;
+
+        if(!inputFile.is_open())
+        {
+            cout << "open file failed!" << endl;
+            return;
         }
 
-        EdgeWeightedDigraph(const string fileName)
+        char buf[256];
+        inputFile.getline(buf, 100);
+        string strV = buf;
+        inputFile.getline(buf, 100);
+        string strECount = buf;
+        this->V = stoi(strV);
+        adj = new Bag<DirectedEdge*>*[V];
+        for(int v = 0; v < V; v++)
         {
-            ifstream inputFile;
-            inputFile.open(fileName, fstream::in | fstream::out);
-            vector<string> strArr;
+            adj[v] = new Bag<DirectedEdge*>();
+        }
+        this->E = 0;
 
-            if(!inputFile.is_open())
-            {
-                cout << "open file failed!" << endl;
-                return;
-            }
-
-            char buf[256];
+        string sp = " ";
+        for(int i = 0; i < stoi(strECount); i++)
+        {
             inputFile.getline(buf, 100);
-            string strV = buf;
-            inputFile.getline(buf, 100);
-            string strECount = buf;
-            this->V = stoi(strV);
-            EdgeWeightedDigraph(stoi(strV));
-            this->E = 0;
-
-            string sp = " ";
-            for(int i = 0; i < stoi(strECount); i++)
-            {
-                inputFile.getline(buf, 100);
-                string strToSplit = buf;
-                strArr.clear();
-                CString::split(strToSplit, sp, strArr);
-                int v = stoi(strArr[0]);
-                int w = stoi(strArr[1]);
-                double weight = stod(strArr[2]);
-                DirectedEdge* e = new DirectedEdge(v, w, weight);
-                addEdge(e);
-            }
-            inputFile.close();
+            string strToSplit = buf;
+            strArr.clear();
+            CString::split(strToSplit, sp, strArr);
+            int v = stoi(strArr[0]);
+            int w = stoi(strArr[1]);
+            double weight = stod(strArr[2]);
+            DirectedEdge* e = new DirectedEdge(v, w, weight);
+            addEdge(e);
         }
+        inputFile.close();
+    }
 
-        int getV()
+    int getV()
+    {
+        return this->V;
+    }
+
+    int getE()
+    {
+        return this->E;
+    }
+
+    void addEdge(DirectedEdge* e)
+    {
+        adj[e->from()]->add(e);
+        this->E++;
+    }
+
+    void getAdj(int v, Bag<DirectedEdge*>& edgeBag)
+    {
+        Bag<DirectedEdge*>::Node* myB = adj[v]->first;
+        while(nullptr != myB)
         {
-            return this->V;
+            edgeBag.add(myB->item);
+            myB = myB->next;
         }
+    }
 
-        int getE()
-        {
-            return this->E;
-        }
-
-        void addEdge(DirectedEdge* e)
-        {
-            adj[e->from()]->add(e);
-            this->E++;
-        }
-
-        void getAdj(int v, Bag<DirectedEdge*>& edgeBag)
+    void getEdges(vector<DirectedEdge*>& edges)
+    {
+        for(int v = 0; v < V; v++)
         {
             Bag<DirectedEdge*>::Node* myB = adj[v]->first;
             while(nullptr != myB)
             {
-                edgeBag.add(myB->item);
+                edges.push_back(myB->item);
                 myB = myB->next;
             }
         }
-
-        void getEdges(vector<DirectedEdge*>& edges)
-        {
-            for(int v = 0; v < V; v++)
-            {
-                for(int v = 0; v < V; v++)
-                {
-                    Bag<DirectedEdge*>::Node* myB = adj[v]->first;
-                    while(nullptr != myB)
-                    {
-                        edges.push_back(myB->item);
-                        myB = myB->next;
-                    }
-                }
-            }
-        }
+    }
 };
 
 #endif
