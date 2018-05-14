@@ -1,12 +1,15 @@
 package C4.U4;
 
-public class DirectedEdge {
-    // edge source
-    private final int v;
-    // edge target
-    private final int w;
-    // edge weight
-    private final double weight;
+import C4.U3.Edge;
+
+
+public class DirectedEdge extends Edge {
+    // // edge source
+    // private final int v;
+    // // edge target
+    // private final int w;
+    // // edge weight
+    // private final double weight;
 
     public DirectedEdge(int v, int w, double weight)
     {
@@ -15,10 +18,10 @@ public class DirectedEdge {
         this.weight = weight;
     }
 
-    public double weight()
-    {
-        return weight;
-    }
+    // public double weight()
+    // {
+    //     return weight;
+    // }
 
     public int from()
     {

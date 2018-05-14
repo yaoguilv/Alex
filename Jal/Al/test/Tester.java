@@ -2,28 +2,25 @@ package test;
 
 import C4.U4.DirectedEdge;
 import C4.U4.EdgeWeightedDigraph;
+import C4.U4.DijkstraSP;
+import StdLib.*;
 
 public class Tester {
     public static void main(String[] args)
     {
-        StdLib.In in = new StdLib.In(args[0]);
-        EdgeWeightedDigraph myEWD = new EdgeWeightedDigraph(in);
+        EdgeWeightedDigraph G;
+        G = new EdgeWeightedDigraph(new In(args[0]));
+        int s = Integer.parseInt(args[1]);
+        DijkstraSP sp = new DijkstraSP(G, s);
 
-        System.out.println(myEWD.V());
-        System.out.println(myEWD.E());
-
-        System.out.println("now vertex 5's following edges:");
-        Iterable<DirectedEdge> myAdj = myEWD.adj(5);
-        for(DirectedEdge myEdge : myAdj)
+        for(int t = 0; t < G.V(); t++)
         {
-            System.out.println(myEdge.toString());
-        }
-
-        System.out.println("now all Edges:");
-        Iterable<DirectedEdge> myAll = myEWD.edges();
-        for(DirectedEdge myEdge : myAll)
-        {
-            System.out.println(myEdge.toString());
+            StdOut.print(s + " to " + t);
+            StdOut.printf(" (%4.2f): ", sp.distTo(t));
+            if(sp.hasPathTo(t))
+                for(DirectedEdge e : sp.pathTo(t))
+                    StdOut.print(e + "    ");
+            StdOut.println();
         }
     }
 }
