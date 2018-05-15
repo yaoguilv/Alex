@@ -13,9 +13,7 @@ public class DirectedEdge extends Edge {
 
     public DirectedEdge(int v, int w, double weight)
     {
-        this.v = v;
-        this.w = w;
-        this.weight = weight;
+        super(v, w, weight);
     }
 
     // public double weight()
@@ -25,17 +23,17 @@ public class DirectedEdge extends Edge {
 
     public int from()
     {
-        return v;
+        return super.either();
     }
 
     public int to()
     {
-        return w;
+        return other(super.either());
     }
 
     public String toString()
     {
-        return String.format("%d->%d %.2f", v, w, weight);
+        return String.format("%d->%d %.2f", super.either(), super.other(super.either()), super.weight());
     }
 
     public static void main(String[] args)

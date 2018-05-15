@@ -51,7 +51,7 @@ public class DijkstraSP {
         return distTo[v] < Double.POSITIVE_INFINITY;
     }
 
-    public Iterable<Edge> pathTo(int v)
+    public Iterable<DirectedEdge> pathTo(int v)
     {
         if(!hasPathTo(v))
             return null;
