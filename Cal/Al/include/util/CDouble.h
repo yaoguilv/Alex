@@ -10,6 +10,7 @@ class CDouble : public Comparable
         double value;
     public:
         CDouble(double val);
+        ~CDouble();
         void setValue(double val);
         double getValue();
         int compareTo(Comparable * that);

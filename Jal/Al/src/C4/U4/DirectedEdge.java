@@ -1,39 +1,39 @@
 package C4.U4;
 
-import C4.U3.Edge;
-
-
-public class DirectedEdge extends Edge {
-    // // edge source
-    // private final int v;
-    // // edge target
-    // private final int w;
-    // // edge weight
-    // private final double weight;
+public class DirectedEdge {
+    // edge source
+    private final int v;
+    // edge target
+    private final int w;
+    // edge weight
+    private final double weight;
 
     public DirectedEdge(int v, int w, double weight)
     {
-        super(v, w, weight);
+        this.v = v;
+        this.w = w;
+        this.weight = weight;
+
     }
 
-    // public double weight()
-    // {
-    //     return weight;
-    // }
+    public double weight()
+    {
+        return weight;
+    }
 
     public int from()
     {
-        return super.either();
+        return v;
     }
 
     public int to()
     {
-        return other(super.either());
+        return w;
     }
 
     public String toString()
     {
-        return String.format("%d->%d %.2f", super.either(), super.other(super.either()), super.weight());
+        return String.format("%d->%d %.2f", v, w, weight);
     }
 
     public static void main(String[] args)

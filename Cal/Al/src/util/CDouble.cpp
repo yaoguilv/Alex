@@ -7,6 +7,9 @@ CDouble::CDouble(double val)
     this->value = val;
 }
 
+CDouble::~CDouble()
+{}
+
 void CDouble::setValue(double val)
 {
     this->value = val;
