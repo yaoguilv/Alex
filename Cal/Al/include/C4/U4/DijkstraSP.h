@@ -6,14 +6,16 @@
 #include "C2/U4/IndexMinPQ.h"
 #include "util/CDouble.h"
 #include "C1/Unit3_Stacks/Bag.h"
-#include "C1/Unit3_Stacks/Stack.h"
+#include <stack>
 #include <limits>
+#include <vector>
 
+using namespace std;
 
 class DijkstraSP {
     private:
         DirectedEdge** edgeTo;
-        CDouble* distTo;
+        vector<CDouble> distTo;
         IndexMinPQ* pq;
 
         void relax(EdgeWeightedDigraph G, int v)
@@ -25,9 +27,9 @@ class DijkstraSP {
             {
                 DirectedEdge* e = myB->item;
                 int w = e->to();
-                if(distTo[w] > distTo[v].getValue() + e->getWeight())
+                if(distTo[w].getValue() > distTo[v].getValue() + e->getWeight())
                 {
-                    distTo[w] = distTo[v] + e->getWeight();
+                    distTo[w] = distTo[v].getValue() + e->getWeight();
                     edgeTo[w] = e;
                     if(pq->contains(w))
                         pq->change(w, new CDouble(distTo[w]));
@@ -42,18 +44,18 @@ class DijkstraSP {
         DijkstraSP(EdgeWeightedDigraph G, int s)
         {
             edgeTo = new DirectedEdge*[G.getV()];
-            distTo = new CDouble[G.getV()];
-            pq = new IndexMinPQ<CDoule>(G.getV());
+            distTo.reserve(G.getV());
+            pq = new IndexMinPQ(G.getV());
 
             for(int v = 0; v < G.getV(); v++)
             {
                 CDouble myPOS(std::numeric_limits<double>::max());
-                distTo[v] = myPOS;
+                distTo.push_back(myPOS);
                 edgeTo[v] = nullptr;
             }
             distTo[s] = 0.0;
 
-            CDouble myd(0.0);
+            CDouble* myd = new CDouble(0.0);
             pq->insert(s, myd);
             while(!pq->isEmpty())
                 relax(G, pq->delMin());
@@ -61,19 +63,18 @@ class DijkstraSP {
 
         double getDistTo(int v)
         {
-            return distTo[v];
+            return distTo[v].getValue();
         }
 
         bool hasPathTo(int v)
         {
-            return distTo[v] < std::numeric_limits<double>::max();
+            return distTo[v].getValue() < std::numeric_limits<double>::max();
         }
 
-        void getPathTo(int v, Stack<DirectedEdge*>& path)
+        void getPathTo(int v, stack<DirectedEdge*>& path)
         {
             if(!hasPathTo(v))
-                path = nullptr;
-            path = new Stack<DirectedEdge*>();
+                return;
             for(DirectedEdge* e = edgeTo[v]; e != nullptr; e = edgeTo[e->from()])
             {
                 path.push(e);
