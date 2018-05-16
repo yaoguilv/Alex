@@ -1,6 +1,5 @@
 #ifndef EDGEWEIGHTEDDIGRAPH_H
 #define EDGEWEIGHTEDDIGRAPH_H
-
 #include "C4/U4/DirectedEdge.h"
 #include "C1/Unit3_Stacks/Bag.h"
 #include "util/CString.h"
