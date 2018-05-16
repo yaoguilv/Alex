@@ -2,6 +2,8 @@ package C4.U2;
 
 import C1.Unit3_Stacks.Queue;
 import C1.Unit3_Stacks.Stack;
+import C4.U4.EdgeWeightedDigraph;
+import C4.U4.DirectedEdge;
 
 public class DepthFirstOrder {
     private boolean[] marked;
@@ -22,6 +24,19 @@ public class DepthFirstOrder {
                 dfs(G, v);
     }
 
+    public DepthFirstOrder(EdgeWeightedDigraph G)
+    {
+        pre = new Queue<Integer>();
+        post = new Queue<Integer>();
+        reversePost = new Stack<Integer>();
+        marked = new boolean[G.V()];
+
+        for(int v = 0; v < G.V(); v++)
+            if(!marked[v])
+                dfs(G, v);
+
+    }
+
     private void dfs(Digraph G, int v)
     {
         pre.enqueue(v);
@@ -30,8 +45,26 @@ public class DepthFirstOrder {
         for(int w : G.adj(v))
             if(!marked[w])
                 dfs(G, w);
+
         post.enqueue(v);
         reversePost.push(v);
+    }
+
+    private void dfs(EdgeWeightedDigraph G, int v)
+    {
+        pre.enqueue(v);
+
+        marked[v] = true;
+        for(DirectedEdge e : G.adj(v))
+        {
+            int w = e.to();
+            if(!marked[w])
+                dfs(G, w);
+        }
+
+        post.enqueue(v);
+        reversePost.push(v);
+
     }
 
     public Iterable<Integer> pre()

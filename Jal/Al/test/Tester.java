@@ -2,8 +2,8 @@ package test;
 
 import C4.U4.DirectedEdge;
 import C4.U4.EdgeWeightedDigraph;
-import C4.U4.DijkstraSP;
 import StdLib.*;
+import C4.U4.AcylicSP;
 
 public class Tester {
     public static void main(String[] args)
@@ -11,7 +11,7 @@ public class Tester {
         EdgeWeightedDigraph G;
         G = new EdgeWeightedDigraph(new In(args[0]));
         int s = Integer.parseInt(args[1]);
-        DijkstraSP sp = new DijkstraSP(G, s);
+        AcylicSP sp = new AcylicSP(G, s);
 
         for(int t = 0; t < G.V(); t++)
         {
@@ -24,4 +24,3 @@ public class Tester {
         }
     }
 }
-import C4.U4.AcycliSP;

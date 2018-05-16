@@ -3,6 +3,7 @@ package C4.U4;
 import C2.U4.IndexMinPQ;
 import C4.U3.Edge;
 import C1.Unit3_Stacks.Stack;
+import StdLib.*;
 
 public class DijkstraSP {
     private DirectedEdge[] edgeTo;
@@ -60,4 +61,23 @@ public class DijkstraSP {
             path.push(e);
         return path;
     }
+
+    public static void main(String[] args)
+    {
+        EdgeWeightedDigraph G;
+        G = new EdgeWeightedDigraph(new In(args[0]));
+        int s = Integer.parseInt(args[1]);
+        DijkstraSP sp = new DijkstraSP(G, s);
+
+        for(int t = 0; t < G.V(); t++)
+        {
+            StdOut.print(s + " to " + t);
+            StdOut.printf(" (%4.2f): ", sp.distTo(t));
+            if(sp.hasPathTo(t))
+                for(DirectedEdge e : sp.pathTo(t))
+                    StdOut.print(e + "    ");
+            StdOut.println();
+        }
+    }
+
 }

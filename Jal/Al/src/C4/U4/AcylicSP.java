@@ -2,25 +2,20 @@ package C4.U4;
 
 import C4.U2.Topological;
 import C4.U3.Edge;
-import C2.U4.IndexMinPQ;
 import C1.Unit3_Stacks.Stack;
 
 public class AcylicSP {
     private DirectedEdge[] edgeTo;
     private double[] distTo;
-    private IndexMinPQ<Double> pq;
 
     public AcylicSP(EdgeWeightedDigraph G, int s)
     {
         edgeTo = new DirectedEdge[G.V()];
         distTo = new double[G.V()];
-        pq = new IndexMinPQ<Double>(G.V());
 
         for(int v = 0; v < G.V(); v++)
             distTo[v] = Double.POSITIVE_INFINITY;
         distTo[s] = 0.0;
-
-        pq.insert(s, 0.0);
 
         Topological top = new Topological(G);
 
@@ -37,10 +32,6 @@ public class AcylicSP {
             {
                 distTo[w] = distTo[v] + e.weight();
                 edgeTo[w] = e;
-                if(pq.contains(w))
-                    pq.change(w, distTo[w]);
-                else
-                    pq.insert(w, distTo[w]);
             }
         }
     }
@@ -55,7 +46,7 @@ public class AcylicSP {
         return distTo[v] < Double.POSITIVE_INFINITY;
     }
 
-    public Iterable<DirectedEdge> pahtTo(int v)
+    public Iterable<DirectedEdge> pathTo(int v)
     {
         if(!hasPathTo(v))
             return null;

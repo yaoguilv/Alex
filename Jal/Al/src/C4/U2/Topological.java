@@ -5,11 +5,22 @@ import C4.U2.DirectedCycle;
 import C4.U2.DepthFirstOrder;
 import C4.U2.Topological;
 import C4.U2.SymbolDigraph;
+import C4.U4.EdgeWeightedDigraph;
 
 public class Topological {
     private Iterable<Integer> order; // topological order
 
     public Topological(Digraph G)
+    {
+        DirectedCycle cyclefinder = new DirectedCycle(G);
+        if(!cyclefinder.hasCycle())
+        {
+            DepthFirstOrder dfs = new DepthFirstOrder(G);
+            order = dfs.reversePost();
+        }
+    }
+
+    public Topological(EdgeWeightedDigraph G)
     {
         DirectedCycle cyclefinder = new DirectedCycle(G);
         if(!cyclefinder.hasCycle())
