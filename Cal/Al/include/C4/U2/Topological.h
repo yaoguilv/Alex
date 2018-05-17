@@ -5,6 +5,7 @@
 #include "C4/U2/DirectedCycle.h"
 #include "C4/U2/DepthFirstOrder.h"
 #include "C1/Unit3_Stacks/Stack.h"
+#include "C4/U4/EdgeWeightedDigraph.h"
 
 class Topological {
 private:
@@ -15,6 +16,16 @@ public:
     Topological(Digraph * G)
     {
         DirectedCycle * cyclefinder = new DirectedCycle(G);
+        if(!cyclefinder->hasCycle())
+        {
+            DepthFirstOrder * dfs = new DepthFirstOrder(G);
+            order = dfs->getReversePost();
+        }
+    }
+
+    Topological(EdgeWeightedDigraph* G)
+    {
+        DirectedCycle* cyclefinder = new DirectedCycle(G);
         if(!cyclefinder->hasCycle())
         {
             DepthFirstOrder * dfs = new DepthFirstOrder(G);
