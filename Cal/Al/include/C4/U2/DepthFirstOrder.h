@@ -5,6 +5,9 @@
 #include "C1/Unit3_Stacks/Stack.h"
 #include "C1/Unit3_Stacks/Bag.h"
 #include "C4/U2/Digraph.h"
+#include "C4/U4/EdgeWeightedDigraph.h"
+#include "C4/U4/DirectedEdge.h"
+
 #include <vector>
 #include <iterator>
 
@@ -33,6 +36,27 @@ class DepthFirstOrder {
             /* cout << v << endl; */
         }
 
+        void dfs(EdgeWeightedDigraph* G, int v)
+        {
+            pre->enqueue(v);
+
+            marked[v] = true;
+            Bag<DirectedEdge*> edgeBag;
+            G->getAdj(v, edgeBag);
+            Bag<DirectedEdge*>::Node* p = edgeBag.first;
+            while(nullptr != p)
+            {
+                DirectedEdge* e = p->item;
+                int w = e->to();
+                if(!marked[w])
+                    dfs(G, w);
+                p = p->next;
+            }
+            post->enqueue(v);
+            reversePost->push(v);
+            /* cout << v << endl; */
+        }
+
     public:
         DepthFirstOrder(Digraph * G)
         {
@@ -46,6 +70,20 @@ class DepthFirstOrder {
                 if(!marked[v])
                     dfs(G, v);
         }
+
+        DepthFirstOrder(EdgeWeightedDigraph* G)
+        {
+            pre = new Queue<int>();
+            post = new Queue<int>();
+            reversePost = new Stack<int>();
+            marked.reserve(G->getV());
+            for(int i = 0; i < G->getV(); i++)
+                marked[i] = false;
+            for(int v = 0; v < G->getV(); v++)
+                if(!marked[v])
+                    dfs(G, v);
+        }
+
 
         Queue<int> * getPre()
         {
