@@ -29,7 +29,7 @@ public:
         adj = new Bag<DirectedEdge*>*[V];
         for(int v = 0; v < V; v++)
         {
-            cout << v << ":" << adj[v] << endl;
+            adj[v] = new Bag<DirectedEdge*>();
         }
     }
 
