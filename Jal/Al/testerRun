@@ -8,5 +8,5 @@ else
     classpath="bin:lib/StdLib.jar"
 fi
 
-java -cp $classpath test.Tester data/tinyEWDAG.txt 5
+java -cp $classpath test.Tester data/jobsPC.txt
 # jdb -classpath $classpath -sourcepath src:test test.Tester

@@ -8,7 +8,7 @@
 #include "C4/U4/EdgeWeightedDigraph.h"
 #include "C4/U4/DijkstraSP.h"
 #include "util/CDouble.h"
-#include "C4/U4/AcylicSP.h"
+#include "C4/U4/AcyclicLP.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ int main(int argc, char ** argv)
     EdgeWeightedDigraph* myEWD = new EdgeWeightedDigraph(fileName);
 
     int s = 5;
-    AcylicSP* sp = new AcylicSP(myEWD, s);
+    AcyclicLP* sp = new AcyclicLP(myEWD, s);
 
     for(int t = 0; t < myEWD->getV(); t++)
     {
