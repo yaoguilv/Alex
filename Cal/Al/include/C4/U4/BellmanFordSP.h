@@ -8,6 +8,8 @@
 #include "C4/U4/DirectedEdge.h"
 #include "C1/Unit3_Stacks/Queue.h"
 #include "util/CInt.h"
+#include "C1/Unit3_Stacks/Bag.h"
+#include "C4/U4/EdgeWeightedDigraph.h"
 
 using namespace std;
 
@@ -16,7 +18,7 @@ privtae:
     // length of path to v
     vector<bool> distTo;
     // last edge on path to v
-    vector<DirectedEdge> edgeTo;
+    vector<DirectedEdge*> edgeTo;
     // Is this vertex on the queue?
     vector<bool> onQ;
     // vertices being relaxed
@@ -24,7 +26,42 @@ privtae:
     // number of calls to relax()
     int cost;
     // negative cycle in edgeTo[]?
-    Iterable<DirectedEdge> cycle;
+    Iterable<DirectedEdge*> cycle;
+
+    void relax(EdgeWeightedDigraph* G, int v)
+    {
+        Bag<DirectedEdge*> edgeBag;
+        G->getAdj(v, edgeBag);
+        Bag<DirectedEdge*>::Node* myB = edgeBag[v]->first;
+        while(nullptr != myB)
+        {
+            DirectedEdge* e = myB->item;
+            int w = e->to();
+            if(distTo[w] > distTo[v] + e->getWeight())
+            {
+                distTo[w] = distTo[v] + e->getWeight();
+                edgeTo[w] = e;
+                if(!onQ[w])
+                {
+                    bellQueue->enqueue(w);
+                    onQ[w] = true;
+                }
+            }
+            if(cost++ % G->getV() == 0)
+                findNegativeCycle();
+            myB = myB->next;
+        }
+    }
+
+    void findNegativeCycle()
+    {
+        int V = edgeTo.size();
+        EdgeWeightedDigraph* spt = new EdgeWeightedDigraph(V);
+        for(int v = 0; v < V; v++)
+            if(edgeTo[v] != nullptr)
+                spt->addEdge(edgeTo[v]);
+
+    }
 
     public:
     BellmanFordSP(EdgeWeightedDigraph* G, int s)
@@ -45,8 +82,12 @@ privtae:
         while(!bellQueue.isEmpty() && !this->hasNegativeCycle())
         {
             int v = bellQueue.dequeue();
+            onQ[v] = false;
+            relax(G, v);
         }
     }
+
+
 };
 
 #endif
