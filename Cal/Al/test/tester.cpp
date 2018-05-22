@@ -16,3 +16,4 @@ int main(int argc, char ** argv)
 {
     return 0;
 }
+#include "C4/U4/BellmanFordSP.h"
