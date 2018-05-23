@@ -26,7 +26,7 @@ privtae:
     // number of calls to relax()
     int cost;
     // negative cycle in edgeTo[]?
-    Iterable<DirectedEdge*> cycle;
+    vector<DirectedEdge*> cycle;
 
     void relax(EdgeWeightedDigraph* G, int v)
     {
@@ -60,7 +60,14 @@ privtae:
         for(int v = 0; v < V; v++)
             if(edgeTo[v] != nullptr)
                 spt->addEdge(edgeTo[v]);
+        EdgeWeightedDirectedCycle* cf = new EdgeWeightedDirectedCycle(spt);
 
+        cf->getCycle(cycle);
+    }
+
+    bool hasNegativeCycle()
+    {
+        return nullptr != cycle;
     }
 
     public:
@@ -87,7 +94,28 @@ privtae:
         }
     }
 
+    void negativeCycle(vector<DirectedEdge*> cycleEdges)
+    {
+        cycleEdges = cycle;
+    }
 
+    double getDistTo(int v)
+    {
+        return distTo[v];
+    }
+
+    bool hasPathTo(int v)
+    {
+        return distTo[v] < numeric_limits::max();
+    }
+
+    void getPathTo(int v, vector<DirectedEdge*>& edges)
+    {
+        if(!hasPathTo(v))
+            return;
+        for(DirectedEdge* e = edgeTo[v]; e != nullptr; e = edgeTo[e->from()])
+            edges.push_back(e);
+    }
 };
 
 #endif
