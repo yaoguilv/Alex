@@ -1,4 +1,4 @@
-#include "C2/U1/CInt.h"
+#include "util/CInt.h"
 
 CInt::CInt(int inInt)
 {

@@ -6,6 +6,7 @@
 
 #include "C1/Unit3_Stacks/Stack.h"
 #include "C4/U4/DirectedEdge.h"
+#include "C4/U4/EdgeWeightedDigraph.h"
 
 using namespace std;
 
@@ -18,16 +19,16 @@ private:
     // = is vertex on stack?
     vector<bool> onStack;
     // directed cycle (or null if no such cycle)
-    Stack<DirectedEdge*> cycle = new Stack<DirectedEdge*>();
+    Stack<DirectedEdge*>* cycle = nullptr;
 
-    void dfs(EdgeWeightedDigraph* G, int v))
+    void dfs(EdgeWeightedDigraph* G, int v)
     {
         onStack[v] = true;
         marked[v] = true;
 
         Bag<DirectedEdge*> edgeBag;
         G->getAdj(v, edgeBag);
-        Bag<DirectedEdge*>::Node* myB = edgeBag[v]->first;
+        Bag<DirectedEdge*>::Node* myB = edgeBag.first;
         while(nullptr != myB)
         {
             DirectedEdge* e = myB->item;
@@ -36,7 +37,7 @@ private:
             if(nullptr != cycle) return;
 
             // found new vertex, so recur
-            else if(!markedp[w])
+            else if(!marked[w])
             {
                 edgeTo[w] = e;
                 dfs(G, w);
@@ -46,7 +47,7 @@ private:
             else if(onStack[w])
             {
                 cycle = new Stack<DirectedEdge*>();
-                while(e->from != w)
+                while(e->from() != w)
                 {
                     cycle->push(e);
                     e = edgeTo[e->from()];
@@ -81,7 +82,7 @@ public:
 
     bool hasCycle()
     {
-        return !cycle.isEmpty();
+        return !cycle->isEmpty();
     }
 
     void getCycle(vector<DirectedEdge*>& edges)
