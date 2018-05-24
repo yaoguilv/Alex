@@ -53,7 +53,6 @@ private:
                     e = edgeTo[e->from()];
                 }
                 cycle->push(e);
-                cycle->push(e);
             }
             myB = myB->next;
         }
@@ -82,11 +81,16 @@ public:
 
     bool hasCycle()
     {
-        return !cycle->isEmpty();
+        if(nullptr != cycle)
+            return !cycle->isEmpty();
+        else
+            return false;
     }
 
     void getCycle(vector<DirectedEdge*>& edges)
     {
+        if(nullptr == cycle)
+            return;
         while(!cycle->isEmpty())
         {
             edges.push_back(cycle->pop());

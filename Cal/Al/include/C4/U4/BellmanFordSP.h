@@ -10,13 +10,14 @@
 #include "util/CInt.h"
 #include "C1/Unit3_Stacks/Bag.h"
 #include "C4/U4/EdgeWeightedDigraph.h"
+#include "C4/U4/EdgeWeightedDirectedCycle.h"
 
 using namespace std;
 
 class BellmanFordSP {
-privtae:
+private:
     // length of path to v
-    vector<bool> distTo;
+    vector<double> distTo;
     // last edge on path to v
     vector<DirectedEdge*> edgeTo;
     // Is this vertex on the queue?
@@ -32,7 +33,7 @@ privtae:
     {
         Bag<DirectedEdge*> edgeBag;
         G->getAdj(v, edgeBag);
-        Bag<DirectedEdge*>::Node* myB = edgeBag[v]->first;
+        Bag<DirectedEdge*>::Node* myB = edgeBag.first;
         while(nullptr != myB)
         {
             DirectedEdge* e = myB->item;
@@ -65,38 +66,41 @@ privtae:
         cf->getCycle(cycle);
     }
 
-    bool hasNegativeCycle()
-    {
-        return nullptr != cycle;
-    }
-
-    public:
+public:
     BellmanFordSP(EdgeWeightedDigraph* G, int s)
     {
         distTo.reserve(G->getV());
         edgeTo.reserve(G->getV());
         onQ.reserve(G->getV());
-        bellQueue = new Queue<CInt*>();
+        bellQueue = new Queue<int>();
         for(int v = 0; v < G->getV(); v++)
         {
-            distTo.push_back(new CInt(numeric_limits<int>::max()));
+            distTo.push_back(numeric_limits<int>::max());
             edgeTo.push_back(nullptr);
             onQ.push_back(false);
         }
         distTo[s] = 0.0;
-        bellQueue.enqueue(new CInt(s));
+        bellQueue->enqueue(s);
         onQ[s] = true;
-        while(!bellQueue.isEmpty() && !this->hasNegativeCycle())
+        while(!bellQueue->isEmpty() && !this->hasNegativeCycle())
         {
-            int v = bellQueue.dequeue();
+            int v = bellQueue->dequeue();
             onQ[v] = false;
             relax(G, v);
         }
     }
 
-    void negativeCycle(vector<DirectedEdge*> cycleEdges)
+    bool hasNegativeCycle()
     {
-        cycleEdges = cycle;
+        return !cycle.empty();
+    }
+
+    void negativeCycle(vector<DirectedEdge*>& cycleEdges)
+    {
+        for(vector<DirectedEdge*>::iterator it = cycle.begin(); it != cycle.end(); it++)
+        {
+            cycleEdges.push_back(*it);
+        }
     }
 
     double getDistTo(int v)
@@ -106,7 +110,7 @@ privtae:
 
     bool hasPathTo(int v)
     {
-        return distTo[v] < numeric_limits::max();
+        return distTo[v] < numeric_limits<double>::max();
     }
 
     void getPathTo(int v, vector<DirectedEdge*>& edges)
