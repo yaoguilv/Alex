@@ -1,13 +1,13 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
-#include <limits>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-    cout << long(numeric_limits<char16_t>::max()) << endl;
-    cout << numeric_limits<int>::max() << endl;
+    string a = "dgew";
+    cout << a.at(1) << endl;
     return 0;
 }
