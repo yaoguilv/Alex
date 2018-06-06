@@ -1,5 +1,7 @@
 package C5.U1;
 
+import StdLib.*;
+
 public class Alphabet {
     // the characters in the alphabet
     private char[] alphabet;

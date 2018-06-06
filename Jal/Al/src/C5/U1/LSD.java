@@ -1,5 +1,7 @@
 package C5.U1;
 
+import StdLib.*;
+
 public class LSD {
     public static void sort(String[] a, int W)
     {
@@ -28,5 +30,23 @@ public class LSD {
             for(int i = 0; i < N; i++)
                 a[i] = aux[i];
         }
+    }
+
+    public static void main(String[] args)
+    {
+        String[] a = In.readStrings(args[0]);
+        int N = a.length;
+
+        // check that strings have fixed length
+        int W = a[0].length();
+        for(int i = 0; i < N; i++)
+            assert a[i].length() == W : "Strings must have fixed length";
+
+        // sort the strings
+        LSD.sort(a, W);
+
+        // print results
+        for (int i = 0; i < N; i++)
+            StdOut.println(a[i]);
     }
 }

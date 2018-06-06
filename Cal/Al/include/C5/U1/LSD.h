@@ -5,6 +5,8 @@
 #include <iterator>
 #include <string>
 
+using namespace std;
+
 class LSD {
 public:
     static void sort(vector<string>& a, int W)
@@ -16,7 +18,7 @@ public:
         for(int i = 0; i < N; i++)
         {
             string b;
-            aux.push_back(nullptr);
+            aux.push_back(b);
         }
 
         for(int d = W - 1; d >= 0; d--)
