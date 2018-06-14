@@ -3,6 +3,7 @@ public class Ticket {
     public static void main(String[] args)
     {
         String myStr = "cdeaf";
-        System.out.println(myStr.charAt(1));
+        String myStr2 = "cddaf";
+        System.out.println(myStr2.compareTo(myStr));
     }
 }
