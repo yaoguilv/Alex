@@ -8,20 +8,18 @@ using namespace std;
 
 class MSD {
 private:
+    const int R = 256;
+    const int M = 125;
+    vector<string> aux;
 
-    static int charAt(string s, int d);
-
-    static void sort(vector<string>& a, int lo, int hi, int d);
-
-    static void insertion(vector<string>& a, int lo, int hi, int d);
-
-    static void exch(vector<string>& a, int i, int j);
-
-    static bool less(string v, string w, int d);
+    int charAt(string s, int d);
+    void sort(vector<string>& a, int lo, int hi, int d);
+    void insertion(vector<string>& a, int lo, int hi, int d);
+    void exch(vector<string>& a, int i, int j);
+    bool less(string v, string w, int d);
 
 public:
-
-    static void sort(vector<string>& a);
+    void sort(vector<string>& a);
 };
 
 #endif

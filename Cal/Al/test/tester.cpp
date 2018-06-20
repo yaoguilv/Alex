@@ -11,7 +11,7 @@ using namespace std;
 int main(int argc, char ** argv)
 {
     /* string fileName = "/usr/lib/.workspace/Alex/Cal/Al/data/words3.txt"; */
-    string fileName = "/home/cx/Downloads/words3.txt";
+    string fileName = "/home/cx/Downloads/words3_4.txt";
     ifstream inputFile(fileName);
     vector<string> strArr;
 
@@ -27,7 +27,8 @@ int main(int argc, char ** argv)
 
     int N = a.size();
 
-    MSD::sort(a);
+    MSD* myMSD = new MSD();
+    myMSD->sort(a);
 
     for(int i = 0; i < N; i++)
         cout << a[i] << endl;

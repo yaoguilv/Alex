@@ -14,3 +14,4 @@ public class Tester {
             StdOut.println(a[i]);
     }
 }
+import C5.U1.Quick3string;

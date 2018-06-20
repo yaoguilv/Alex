@@ -1,10 +1,5 @@
 #include "C5/U1/MSD.h"
 
-    static const int MSD::R = 256;
-    static const int MSD::M = 125;
-    static vector<string> MSD::aux;
-
-
 int MSD::charAt(string s, int d)
 {
     if(d < s.size())
